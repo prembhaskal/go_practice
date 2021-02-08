@@ -1,7 +1,7 @@
 package main
 
-// https://www.spoj.com/problems/PRIME1/
-// 1 <= m <= n <= 1000000000, n-m<=100000
+// https://www.spoj.com/problems/PRIME1/ 
+// 1 <= m <= n <= 1000000000, n-m <= 100000
 
 import (
 	"bufio"
