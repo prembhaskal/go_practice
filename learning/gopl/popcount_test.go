@@ -1,7 +1,6 @@
 package gopl
 
 import (
-	// "fmt"	
 	"testing"
 )
 
