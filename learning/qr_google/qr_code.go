@@ -25,6 +25,7 @@ func main() {
 }
 
 func qr(w http.ResponseWriter, req *http.Request) {
+    fmt.Printf("host is %s", req.Host)
     templ.Execute(w, req.FormValue("s"))
 }
 
