@@ -44,6 +44,7 @@ import (
 	// _ "k8s.io/client-go/plugin/pkg/client/auth/openstack"
 )
 
+// Reference: https://stackoverflow.com/questions/58084335/how-do-i-get-update-a-kubernetes-custom-resource-from-a-go-program
 func main() {
 	var kubeconfig *string
 	if home := homedir.HomeDir(); home != "" {
