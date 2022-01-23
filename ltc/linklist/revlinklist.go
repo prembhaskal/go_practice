@@ -15,6 +15,7 @@ type ListNode struct {
 
 // prev -> curr -> next  ==> prev <- curr <- next
 // here head is the 1st element (with a value)
+// https://leetcode.com/problems/reverse-linked-list/
 func reverseList(head *ListNode) *ListNode {
 	var curr, prev, next *ListNode
 
