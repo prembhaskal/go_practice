@@ -4,6 +4,8 @@ package array
 
 // 3, 2, 2, 3
 
+// TODO - remove with solution1 from ltc.
+
 func removeElement(nums []int, val int) int {
 	end := len(nums) - 1
 	for i := 0; i <= end; {
