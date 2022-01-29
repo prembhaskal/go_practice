@@ -25,6 +25,7 @@ package array
 // 	if 1, fill once, reduce j once
 	
 // 	reduce i
+// TODO - optimize / simplify further.
 func duplicateZeros(arr []int) {
 	// find no. of zeroes within array.
 	cnt := -1
@@ -86,6 +87,8 @@ func duplicateZeros(arr []int) {
 	}
 }
 
+
+// NAIVE one
 func duplicateZeros1(arr []int) {
 	for i := 0; i < len(arr); i++ {
 		if arr[i] == 0 {
