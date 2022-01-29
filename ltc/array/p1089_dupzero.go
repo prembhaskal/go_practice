@@ -2,6 +2,29 @@ package array
 
 // https://leetcode.com/problems/duplicate-zeros/
 
+// Explanation
+// [1, 0, 0, 0, 2, 3]
+
+
+// cnt = 3
+
+// // 3 elements to be removed from back
+// [1, 0, 0, 0, 0, 0, 0, 2 , 3]  // eg. aisa dikhta actual array, if it could be extended
+
+// so 3 is removed   					i = 5
+//    2 is removed   					i = 4
+//    0 is removed  but only once      i = 3 // note that countonce using a flag.
+
+// so we have one pointer at the last after removal at i == 3
+
+// one pointer at i // from above calc.
+// one pointer at j // last index of array
+
+// keep iterating from back,
+// 	if 0, fill twice, reduce j twice
+// 	if 1, fill once, reduce j once
+	
+// 	reduce i
 func duplicateZeros(arr []int) {
 	// find no. of zeroes within array.
 	cnt := -1
