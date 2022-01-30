@@ -1,5 +1,7 @@
 package wc_278
 
+// TODO
+// PENDING
 func subStrHash(s string, power int, modulo int, k int, hashValue int) string {
 	n := len(s)
 	// precalc := make([]int, n)
