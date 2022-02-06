@@ -2,6 +2,9 @@ package wc_278
 
 import "sort"
 
+// https://leetcode.com/contest/weekly-contest-278/problems/keep-multiplying-found-values-by-two/
+
+// TODO, can be solved using map in easy way.
 func findFinalValue(nums []int, original int) int {
     sort.Ints(nums)
 

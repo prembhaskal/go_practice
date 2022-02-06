@@ -8,6 +8,7 @@ package wc_278
 
 // on [1, 1, 1, 0, 0]
 
+// https://leetcode.com/contest/weekly-contest-278/problems/all-divisions-with-the-highest-score-of-a-binary-array/
 func maxScoreIndices(nums []int) []int {
 	n := len(nums)
 	zerocnt := make([]int, n+1)
