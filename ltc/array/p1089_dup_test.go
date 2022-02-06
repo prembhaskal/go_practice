@@ -7,18 +7,18 @@ import (
 
 func TestDupZero(t *testing.T) {
 	// arr := []int{1, 0 , 0 , 2, 3}
-	// runTest(arr)
+	// runTestdupzero(arr)
 
-	runTest([]int{1})
-	runTest([]int{1, 0})
-	runTest([]int{0, 1})
-	runTest([]int{1, 0, 0, 0})
-	runTest([]int{1, 0, 0, 2, 3})
-	runTest([]int{1, 0, 0, 0, 2, 3})
-	runTest([]int{1, 0, 2, 3, 0, 4, 5, 0})
+	runTestdupzero([]int{1})
+	runTestdupzero([]int{1, 0})
+	runTestdupzero([]int{0, 1})
+	runTestdupzero([]int{1, 0, 0, 0})
+	runTestdupzero([]int{1, 0, 0, 2, 3})
+	runTestdupzero([]int{1, 0, 0, 0, 2, 3})
+	runTestdupzero([]int{1, 0, 2, 3, 0, 4, 5, 0})
 }
 
-func runTest(arr []int) {
+func runTestdupzero(arr []int) {
 	fmt.Println()
 	fmt.Printf("before: %v\n", arr)
 	duplicateZeros(arr)
