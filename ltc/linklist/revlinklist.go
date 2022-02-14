@@ -1,4 +1,4 @@
-package revlinklist
+package linklist
 
 /**
  * Definition for singly-linked list.

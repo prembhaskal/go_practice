@@ -1,4 +1,4 @@
-package revlinklist
+package linklist
 
 import (
 	"fmt"
