@@ -26,8 +26,6 @@ func NewLibrary() *library {
 }
 
 func (l *library) C() *client {
-	l.mx.Lock()
-	defer l.mx.Unlock()
 	return l.c
 }
 
