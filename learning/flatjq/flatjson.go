@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"os"
 
@@ -9,6 +10,10 @@ import (
 )
 
 func main() {
+	var values bool
+	flag.BoolVar(&values, "values", false, "to show values")
+	flag.Parse()
+
 	decoder := json.NewDecoder(os.Stdin)
 	var data map[string]interface{}
 	err := decoder.Decode(&data)
@@ -23,7 +28,11 @@ func main() {
 		return
 	}
 
-	for k,v := range flatmap {
-		fmt.Printf("%s  : %s\n", k, v)
+	for k, v := range flatmap {
+		if values {
+			fmt.Printf("%s  : %s\n", k, v)
+		} else {
+			fmt.Printf("%s\n", k)
+		}
 	}
 }
