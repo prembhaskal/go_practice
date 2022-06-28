@@ -11,7 +11,7 @@ func validMountainArray1(arr []int) bool {
 
 	dec := false
 	i := 1
-	for ; i < n;  {
+	for i < n {
 		if arr[i] > arr[i-1] {
 			i++
 		} else {

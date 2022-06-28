@@ -11,7 +11,7 @@ func (c *clientsync) Add(x int) int {
 }
 
 type librarySync struct {
-	c *clientsync
+	c  *clientsync
 	mx sync.Mutex
 }
 

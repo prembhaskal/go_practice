@@ -4,7 +4,6 @@ import (
 	"testing"
 )
 
-
 func TestPopCount(t *testing.T) {
 	var x uint64 = 0b1111000011110010111111001111001111110100111110001111001011111010
 	s := PopCount(x)
@@ -27,35 +26,35 @@ func assert(t *testing.T, exp, act int) {
 
 func BenchmarkPopCount(b *testing.B) {
 	var x uint64 = 0b1111000011110010111111001111001111110100111110001111001011111010
-	for i:=0;i<b.N;i++ {
+	for i := 0; i < b.N; i++ {
 		PopCount(x)
 	}
 }
 
 func BenchmarkPopCountLoop(b *testing.B) {
 	var x uint64 = 0b1111000011110010111111001111001111110100111110001111001011111010
-	for i:=0;i<b.N;i++ {
+	for i := 0; i < b.N; i++ {
 		PopCountLoop(x)
 	}
 }
 
 func BenchmarkPopCountBitshift(b *testing.B) {
 	var x uint64 = 0b1111000011110010111111001111001111110100111110001111001011111010
-	for i:=0;i<b.N;i++ {
+	for i := 0; i < b.N; i++ {
 		PopCountBitShift(x)
 	}
 }
 
 func BenchmarkPopCountMinusOne(b *testing.B) {
 	var x uint64 = 0b1111000011110010111111001111001111110100111110001111001011111010
-	for i:=0;i<b.N;i++ {
+	for i := 0; i < b.N; i++ {
 		PopCountMinusOne(x)
 	}
 }
 
 func BenchmarkPopCountMathsBit(b *testing.B) {
 	var x uint64 = 0b1111000011110010111111001111001111110100111110001111001011111010
-	for i:=0;i<b.N;i++ {
+	for i := 0; i < b.N; i++ {
 		PopCountMathBits(x)
 	}
 }

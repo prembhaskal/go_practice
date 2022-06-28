@@ -44,7 +44,7 @@ func parseUsingStringOps(filename string) {
 		if len(words) > 1 {
 			second = words[1]
 		}
-		
+
 		fmt.Printf("parsed output: first: %s, second: %s\n", first, second)
 	}
 }

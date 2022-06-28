@@ -5,7 +5,6 @@ import (
 	"strings"
 )
 
-
 // TODO - complete this.
 // HINT - we don't have to really implement bit operations, keep track of all flips, counts etc.
 // https://leetcode.com/contest/weekly-contest-279/problems/design-bitset/
@@ -55,7 +54,7 @@ func (this *Bitset) Flip() {
 }
 
 func (this *Bitset) All() bool {
-	
+	return false
 }
 
 func (this *Bitset) One() bool {

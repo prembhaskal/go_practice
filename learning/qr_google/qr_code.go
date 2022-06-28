@@ -2,31 +2,30 @@
 package main
 
 import (
-    "flag"
-    "fmt"
-    "html/template"
-    "log"
-    "net/http"
+	"flag"
+	"fmt"
+	"html/template"
+	"log"
+	"net/http"
 )
-
 
 var addr = flag.String("addr", ":1718", "http service address") // Q=17, R=18
 
 var templ = template.Must(template.New("qr").Parse(templateStr))
 
 func main() {
-    flag.Parse()
-    http.Handle("/", http.HandlerFunc(qr))
-    fmt.Printf("starting server on %s\n", *addr)
-    err := http.ListenAndServe(*addr, nil)
-    if err != nil {
-        log.Fatal("ListenAndServe:", err)
-    }
+	flag.Parse()
+	http.Handle("/", http.HandlerFunc(qr))
+	fmt.Printf("starting server on %s\n", *addr)
+	err := http.ListenAndServe(*addr, nil)
+	if err != nil {
+		log.Fatal("ListenAndServe:", err)
+	}
 }
 
 func qr(w http.ResponseWriter, req *http.Request) {
-    fmt.Printf("host is %s", req.Host)
-    templ.Execute(w, req.FormValue("s"))
+	fmt.Printf("host is %s", req.Host)
+	templ.Execute(w, req.FormValue("s"))
 }
 
 const templateStr = `

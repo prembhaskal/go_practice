@@ -6,7 +6,7 @@ import "sort"
 
 // TODO, can be solved using map in easy way.
 func findFinalValue(nums []int, original int) int {
-    sort.Ints(nums)
+	sort.Ints(nums)
 
 	max := nums[len(nums)-1]
 

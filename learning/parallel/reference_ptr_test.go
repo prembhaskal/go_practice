@@ -21,7 +21,7 @@ func TestRaceTest1(t *testing.T) {
 		}()
 
 		wg.Add(1)
-		go func(){
+		go func() {
 			l.UpdateClient()
 			wg.Done()
 		}()
@@ -29,7 +29,6 @@ func TestRaceTest1(t *testing.T) {
 
 	wg.Wait()
 }
-
 
 func TestRaceTest2(t *testing.T) {
 	l := parallel.NewLibrarySync()
@@ -45,7 +44,7 @@ func TestRaceTest2(t *testing.T) {
 		}()
 
 		wg.Add(1)
-		go func(){
+		go func() {
 			l.UpdateClient()
 			wg.Done()
 		}()

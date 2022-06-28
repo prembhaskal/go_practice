@@ -9,7 +9,7 @@ func searchInsert(nums []int, target int) int {
 		mid := start + (end-start)/2
 		if nums[mid] == target {
 			return mid
-		} else if target < nums[mid] { 
+		} else if target < nums[mid] {
 			if mid > 0 && target > nums[mid-1] {
 				return mid // mid is the index where it can be inserted.
 			}

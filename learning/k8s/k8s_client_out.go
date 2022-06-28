@@ -31,8 +31,8 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/homedir"
 
-	"sigs.k8s.io/controller-runtime/pkg/client"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	//
 	// Uncomment to load all auth plugins
 	// _ "k8s.io/client-go/plugin/pkg/client/auth"
@@ -75,8 +75,8 @@ func main() {
 
 	uobj := &unstructured.Unstructured{}
 	uobj.SetGroupVersionKind(schema.GroupVersionKind{
-		Kind: "Memcached",
-		Group: "cache.nokia.com",
+		Kind:    "Memcached",
+		Group:   "cache.nokia.com",
 		Version: "v1alpha1",
 	})
 	err = k8sclient.Get(context.Background(), client.ObjectKey{Namespace: "default", Name: "memcached-prem-test2"}, uobj)
@@ -87,15 +87,12 @@ func main() {
 		fmt.Printf("got custom resource spec: %v\n", uobj.Object["spec"])
 	}
 
-
-
-	
 	var ch chan int
 	<-ch
 }
 
 func getCustomResource(clientset *kubernetes.Clientset) {
-	
+
 }
 
 func watchPods(clientset *kubernetes.Clientset) {
@@ -130,5 +127,3 @@ func watchPods(clientset *kubernetes.Clientset) {
 		time.Sleep(10 * time.Second)
 	}
 }
-
-

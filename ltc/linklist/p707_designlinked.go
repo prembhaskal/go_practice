@@ -116,7 +116,7 @@ func (this *MyLinkedList) DeleteAtIndex(idx int) {
 	prev := this.head
 	i := 0
 	for prev != nil {
-		if i == idx - 1 {
+		if i == idx-1 {
 			break
 		}
 		i++

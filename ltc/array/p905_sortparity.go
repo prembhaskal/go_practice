@@ -32,7 +32,7 @@ func sortArrayByParity(nums []int) []int {
 		if nums[od]%2 == 0 {
 			od++
 		}
-		if od < n && nums[od]%2 == 1 && od < ev{
+		if od < n && nums[od]%2 == 1 && od < ev {
 			tmp := nums[od]
 			nums[od] = nums[ev]
 			nums[ev] = tmp

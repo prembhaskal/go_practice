@@ -25,15 +25,15 @@ func TestLinkedListDesign(t *testing.T) {
 	// fmt.Printf("val: %d\n", param1)
 	// obj.AddAtTail(3)
 	// fmt.Printf("linkedlist: %s\n", obj)
-	obj.AddAtIndex(1,2)
+	obj.AddAtIndex(1, 2)
 	fmt.Printf("add '%d' at index '%d'\n", 2, 1)
 	fmt.Printf("linkedlist: %s\n\n", obj)
-	
-	obj.AddAtIndex(2,5)
+
+	obj.AddAtIndex(2, 5)
 	fmt.Printf("add '%d' at index '%d'\n", 5, 2)
 	fmt.Printf("linkedlist: %s\n\n", obj)
-	
-	obj.AddAtIndex(9,10)
+
+	obj.AddAtIndex(9, 10)
 	fmt.Printf("add '%d' at index '%d'\n", 10, 9)
 	fmt.Printf("linkedlist: %s\n\n", obj)
 
@@ -42,16 +42,15 @@ func TestLinkedListDesign(t *testing.T) {
 	fmt.Printf("value at index:%d, val: %d\n", 2, obj.Get(2))
 	fmt.Printf("value at index:%d, val: %d\n", 3, obj.Get(3))
 	fmt.Printf("value at index:%d, val: %d\n", 5, obj.Get(5))
-	
+
 	obj.DeleteAtIndex(2)
 	fmt.Printf("delete at index: '%d'\n", 2)
 	fmt.Printf("linkedlist: %s\n\n", obj)
 
-
 	obj.DeleteAtIndex(0)
 	fmt.Printf("delete at index '%d'\n", 0)
 	fmt.Printf("linkedlist: %s\n\n", obj)
-	
+
 	obj.DeleteAtIndex(3)
 	fmt.Printf("delete at index '%d'\n", 3)
 	fmt.Printf("linkedlist: %s\n\n", obj)
