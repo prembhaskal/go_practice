@@ -54,7 +54,11 @@ func (this *Bitset) Flip() {
 }
 
 func (this *Bitset) All() bool {
+<<<<<<< HEAD
 	return false
+=======
+
+>>>>>>> eff6115312ba137f186897e55005d208ebf1cc9f
 }
 
 func (this *Bitset) One() bool {

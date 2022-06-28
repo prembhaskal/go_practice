@@ -3,7 +3,11 @@ export COMPOSE_HTTP_TIMEOUT ?= 480
 
 
 
+<<<<<<< HEAD
 .PHONY: test benchmark run build update-deps lint test-extra 
+=======
+.PHONY: test benchmark run build update-deps build-with-docker docker-build helm-create docker-push lint install-build-deps test-extra contract-test-provider contract-test-consumer legal-check run-sonar-analysis
+>>>>>>> eff6115312ba137f186897e55005d208ebf1cc9f
 
 GOPATH := $(shell go env GOPATH)
 LINTERS := \
