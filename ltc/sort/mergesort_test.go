@@ -8,10 +8,10 @@ import (
 )
 
 func TestMerge1(t *testing.T) {
-	n1 := []int{1, 4, 5, 0 , 0 ,0}
+	n1 := []int{1, 4, 5, 0, 0, 0}
 	n2 := []int{2, 3, 4}
 
-	n3 := []int{1, 2, 3, 4, 4 ,5}
+	n3 := []int{1, 2, 3, 4, 4, 5}
 
 	merge1(n1, 3, n2, 3)
 	fmt.Printf("%v\n", n1)
@@ -20,9 +20,9 @@ func TestMerge1(t *testing.T) {
 		return
 	}
 
-	n1 = []int{1, 4, 5, 0 , 0 ,0}
+	n1 = []int{1, 4, 5, 0, 0, 0}
 	n2 = []int{8, 9, 10}
-	n3 = []int{1, 4 ,5, 8, 9, 10}
+	n3 = []int{1, 4, 5, 8, 9, 10}
 
 	merge1(n1, 3, n2, 3)
 	if !reflect.DeepEqual(n3, n1) {
@@ -32,15 +32,14 @@ func TestMerge1(t *testing.T) {
 	fmt.Printf("%v\n", n1)
 }
 
-
 func TestMerge2(t *testing.T) {
-	n1 := []int{1, 4, 5, 0 , 0 ,0}
+	n1 := []int{1, 4, 5, 0, 0, 0}
 	n2 := []int{2, 3, 4}
 
 	merge2(n1, 3, n2, 3)
 	fmt.Printf("%v\n", n1)
 
-	n1 = []int{1, 4, 5, 0 , 0 ,0}
+	n1 = []int{1, 4, 5, 0, 0, 0}
 	n2 = []int{8, 9, 10}
 
 	merge2(n1, 3, n2, 3)

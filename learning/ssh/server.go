@@ -10,6 +10,7 @@ import (
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/terminal"
 )
+
 // code take from the https://pkg.go.dev/golang.org/x/crypto/ssh#example-NewServerConn
 func main() {
 	// An SSH server is represented by a ServerConfig, which holds
@@ -89,7 +90,7 @@ func main() {
 
 		go func() {
 			defer channel.Close()
-			out:
+		out:
 			for {
 				line, err := term.ReadLine()
 				if err != nil {
@@ -99,7 +100,7 @@ func main() {
 
 				// fmt.Fprintf(channel, "%s", line)
 
-				switch(line) {
+				switch line {
 				case "info":
 					term.Write([]byte(fmt.Sprintf("this is terminal emulator\n")))
 				case "quit":

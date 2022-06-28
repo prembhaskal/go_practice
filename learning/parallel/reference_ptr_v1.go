@@ -11,7 +11,7 @@ func (c *client) Add(x int) int {
 }
 
 type library struct {
-	c *client
+	c  *client
 	mx sync.Mutex
 }
 

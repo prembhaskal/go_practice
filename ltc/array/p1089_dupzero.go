@@ -5,7 +5,6 @@ package array
 // Explanation
 // [1, 0, 0, 0, 2, 3]
 
-
 // cnt = 3
 
 // // 3 elements to be removed from back
@@ -23,7 +22,7 @@ package array
 // keep iterating from back,
 // 	if 0, fill twice, reduce j twice
 // 	if 1, fill once, reduce j once
-	
+
 // 	reduce i
 // TODO - optimize / simplify further.
 func duplicateZeros(arr []int) {
@@ -86,7 +85,6 @@ func duplicateZeros(arr []int) {
 
 	}
 }
-
 
 // NAIVE one
 func duplicateZeros1(arr []int) {

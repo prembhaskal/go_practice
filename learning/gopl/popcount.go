@@ -23,7 +23,7 @@ func PopCount(x uint64) int {
 
 func PopCountLoop(x uint64) int {
 	s := 0
-	for i:=0;i<8;i++ {
+	for i := 0; i < 8; i++ {
 		s += int(pc[byte(x>>(i*8))])
 	}
 	return s
@@ -31,8 +31,8 @@ func PopCountLoop(x uint64) int {
 
 func PopCountBitShift(x uint64) int {
 	s := 0
-	for;x != 0; {
-		s += int(x&1)
+	for x != 0 {
+		s += int(x & 1)
 		x = x >> 1
 	}
 
@@ -42,8 +42,8 @@ func PopCountBitShift(x uint64) int {
 func PopCountMinusOne(x uint64) int {
 	// x&(x-1) clears rightmost 1.
 	s := 0
-	for x>0 {
-		x = x & (x-1)
+	for x > 0 {
+		x = x & (x - 1)
 		s++
 	}
 
