@@ -14,7 +14,7 @@ func main() {
 	flag.Parse()
 
 	parseUsingfscan(filename)
-	fmt.Println("\n\n")
+	fmt.Println("")
 	parseUsingStringOps(filename)
 }
 

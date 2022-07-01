@@ -1,4 +1,5 @@
 package linklist
+
 /**
  * Definition for singly-linked list.
  * type ListNode struct {
@@ -6,34 +7,34 @@ package linklist
  *     Next *ListNode
  * }
  */
-func detectCycle(head *ListNode) *ListNode {
-    sptr := head
-    fptr := head
+func detectCycle2(head *ListNode) *ListNode {
+	sptr := head
+	fptr := head
 
-    hasCycle := false
-    for ; sptr != nil && fptr != nil ; {
-        sptr = sptr.Next
-        if fptr.Next == nil {
-            break
-        }
-        fptr = fptr.Next.Next
+	hasCycle := false
+	for sptr != nil && fptr != nil {
+		sptr = sptr.Next
+		if fptr.Next == nil {
+			break
+		}
+		fptr = fptr.Next.Next
 
-        // check
-        if sptr == fptr {
-            hasCycle = true
-            break
-        }
-    }
+		// check
+		if sptr == fptr {
+			hasCycle = true
+			break
+		}
+	}
 
-    if !hasCycle {
-        return nil
-    }
+	if !hasCycle {
+		return nil
+	}
 
-    // start a pointer from start and continue the sptr too. check where they meet.
-    nptr := head    
-    for fptr != nptr {
-        fptr = fptr.Next
-        nptr = nptr.Next
-    }
-    return nptr
+	// start a pointer from start and continue the sptr too. check where they meet.
+	nptr := head
+	for fptr != nptr {
+		fptr = fptr.Next
+		nptr = nptr.Next
+	}
+	return nptr
 }
