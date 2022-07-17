@@ -35,13 +35,21 @@ func (s *stk) push(val int) {
 }
 
 func (s *stk) pop() int {
-	if len(s.arr) == 0 {
+	if s.isempty() {
 		panic("empty stack")
 	}
 	n := len(s.arr)
 	val := s.arr[n-1]
 	s.arr = s.arr[:n-1]
 	return val
+}
+
+func (s *stk) peek() int {
+	return s.arr[len(s.arr)-1]
+}
+
+func (s *stk) isempty() bool {
+	return len(s.arr) == 0
 }
 
 func (s *stk) String() string {

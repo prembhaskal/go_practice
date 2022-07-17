@@ -8,7 +8,7 @@ type MyCircularQueue struct {
 	k    int
 }
 
-func Constructor(k int) MyCircularQueue {
+func Constructor622(k int) MyCircularQueue {
 	return MyCircularQueue{
 		arr:  make([]int, k),
 		size: 0,
