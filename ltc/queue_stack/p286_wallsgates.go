@@ -33,11 +33,10 @@ func addNeighbour(rooms [][]int, iq *intq286, dist, i, j int) {
 	if i >= len(rooms) || i < 0 {
 		return
 	}
-	if rooms[i][j] <= dist {
-		return
+	if rooms[i][j] == 2147483647 { // update only non-visited nodes.
+		rooms[i][j] = dist
+		iq.enq(newnode286(i, j))
 	}
-	rooms[i][j] = dist
-	iq.enq(newnode286(i, j))
 }
 
 type node286 struct {
