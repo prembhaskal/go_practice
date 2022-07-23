@@ -1,4 +1,5 @@
 package queue_stack
+
 func numIslands(grid [][]byte) int {
 	return doDFSWithStack(grid)
 }
@@ -91,7 +92,6 @@ func (s *islandstack) isempty() bool {
 	return len(s.arr) == 0
 }
 
-
 func doBFS(grid [][]byte) int {
 	rows := len(grid)
 	cols := len(grid[0])
@@ -111,8 +111,8 @@ func doBFS(grid [][]byte) int {
 			if string(grid[i][j]) == "0" {
 				continue
 			}
-            searchByBFS(grid, visited, i, j)
-            total++
+			searchByBFS(grid, visited, i, j)
+			total++
 		}
 	}
 
@@ -129,10 +129,10 @@ func searchByBFS(grid [][]byte, visited [][]bool, i, j int) {
 		if visited[nd.i][nd.j] {
 			continue
 		}
-        if string(grid[nd.i][nd.j]) == "0" {
-            continue
-        }
-        visited[nd.i][nd.j] = true
+		if string(grid[nd.i][nd.j]) == "0" {
+			continue
+		}
+		visited[nd.i][nd.j] = true
 
 		addToQueue(grid, nd.i+1, nd.j, nq)
 		addToQueue(grid, nd.i-1, nd.j, nq)
@@ -149,9 +149,9 @@ func addToQueue(grid [][]byte, i, j int, nq *nodequeue) {
 	if j < 0 || j >= len(grid[0]) {
 		return
 	}
-    if string(grid[i][j]) == "0" {
-        return
-    }
+	if string(grid[i][j]) == "0" {
+		return
+	}
 	nq.add(newnode(i, j))
 	return
 }
