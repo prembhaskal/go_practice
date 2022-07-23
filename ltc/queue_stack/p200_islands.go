@@ -116,7 +116,7 @@ func doDFS(grid [][]byte) int {
 			if string(grid[i][j]) == "1" && !seen[i][j] {
 				// fmt.Printf("checking node %d:%d\n", i , j)
 				visitConnected(i, j, grid, seen)
-				seen[i][j] = true
+				// seen[i][j] = true
 				total++
 			}
 		}
