@@ -39,8 +39,7 @@ func inorderTraversalIter(root *TreeNode) []int {
 			curr = curr.Left
 		}
 
-		// got a curr with no left.
-		curr = stk.pop()
+		curr = stk.pop() // got a curr whose left side is all handled by now.
 		nodes = append(nodes, curr.Val)
 
 		curr = curr.Right // don't add right yet, make it root and repeat.
@@ -61,13 +60,6 @@ func newinorderstack() *inorderstack {
 
 func (s *inorderstack) push(node *TreeNode) {
 	s.ar = append(s.ar, node)
-}
-
-func (s *inorderstack) peek() *TreeNode {
-	if s.isempty() {
-		return nil
-	}
-	return s.ar[len(s.ar)-1]
 }
 
 func (s *inorderstack) pop() *TreeNode {
