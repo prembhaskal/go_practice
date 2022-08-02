@@ -28,6 +28,7 @@ func (this *NumArray) SumRange(left int, right int) int {
  * param_2 := obj.SumRange(left,right);
  */
 
+// TODO - implement with a array instaed of linked nodes.
 // segment tree
 type segNode struct {
 	left  *segNode
@@ -88,7 +89,7 @@ func update(left, right, idx, newval int, root *segNode) {
 	// fmt.Printf("updated node[%d:%d] with new value: %d, old value: %d\n", left, right, root.val, oldval)
 }
 
-func querytree(ql, qr, left, right int, root *segNode) int {
+func querytree1(ql, qr, left, right int, root *segNode) int { // variation where the range ql, qr are not changed, only the conditions are changed
 	// fmt.Printf("query ql: %d, qr: %d, left: %d, right: %d\n", ql, qr, left, right)
 	// left .... right  ql .... qr
 	//  ql ... qr left .... right
@@ -106,5 +107,47 @@ func querytree(ql, qr, left, right int, root *segNode) int {
 
 	// partial overlap
 	mid := (left + right) / 2
-	return querytree(ql, qr, left, mid, root.left) + querytree(ql, qr, mid+1, right, root.right)
+	return querytree1(ql, qr, left, mid, root.left) + querytree1(ql, qr, mid+1, right, root.right)
 }
+
+func querytree(ql, qr, left, right int, root *segNode) int {
+	// fmt.Printf("query ql: %d, qr: %d, left: %d, right: %d\n", ql, qr, left, right)
+	// left .... right  ql .... qr
+	//  ql ... qr left .... right
+	// non overlap
+	// if ql > right || qr < left {
+	// // fmt.Printf("non overlap, returning\n")
+	// 	return 0
+	// }
+
+	// ql ... left ... right ....qr
+	// full within
+	if ql == left && qr == right {
+		return root.val
+	}
+
+	// partial overlap
+	mid := (left + right) / 2
+	if qr <= mid { // only in left
+		return querytree(ql, qr, left, mid, root.left)
+	} else if ql >= mid+1 { // only in right
+		return querytree(ql, qr, mid+1, right, root.right)
+	} else {
+		return querytree(ql, mid, left, mid, root.left) + querytree(mid+1, qr, mid+1, right, root.right)
+	}
+}
+
+// public int sumRange(SegmentTreeNode root, int start, int end) {
+//     if (root.end == end && root.start == start) {
+//         return root.sum;
+//     } else {
+//         int mid = root.start + (root.end - root.start) / 2;
+//         if (end <= mid) {
+//             return sumRange(root.left, start, end);
+//         } else if (start >= mid+1) {
+//             return sumRange(root.right, start, end);
+//         }  else {
+//             return sumRange(root.right, mid+1, end) + sumRange(root.left, start, mid);
+//         }
+//     }
+// }
