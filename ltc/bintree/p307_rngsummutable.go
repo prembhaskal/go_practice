@@ -30,8 +30,8 @@ func (this *NumArray) SumRange(left int, right int) int {
 
 // TODO - current implementation runs slow - > 900ms, whereas same implementation in java runs in 112ms , find root cause.
 // https://leetcode.com/problems/range-sum-query-mutable/discuss/75724/17-ms-Java-solution-with-segment-tree  Java impl.
- //  TODO 1 - implement with a array instaed of linked nodes.
- //  TODO 
+//  TODO 1 - implement with a array instaed of linked nodes.
+//  TODO
 // segment tree
 type segNode struct {
 	left  *segNode
