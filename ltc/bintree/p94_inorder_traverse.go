@@ -10,6 +10,7 @@ package bintree
  */
 // in order --> in(LEFTSIDE) - ROOT - in(RIGHTSIDE)
 func inorderTraversal(root *TreeNode) []int {
+	// return inorderTraversalRec(root)
 	return inorderTraversalIter(root)
 }
 
@@ -32,7 +33,7 @@ func inorderTraversalIter(root *TreeNode) []int {
 
 	curr := root
 
-	for !stk.isempty() {
+	for !stk.isempty() || curr != nil {
 		// curr is top, push it and all its left
 		for curr != nil {
 			stk.push(curr)
