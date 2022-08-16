@@ -18,10 +18,10 @@ func TestSortArray(t *testing.T) {
 		{
 			[]int{1},
 		},
-		{[]int{1, 1},},
-		{[]int{1, 2},},
-		{[]int{1, 2, 1},},
-		{[]int{1, 1, 2},},
+		{[]int{1, 1}},
+		{[]int{1, 2}},
+		{[]int{1, 2, 1}},
+		{[]int{1, 1, 2}},
 	}
 
 	for _, tc := range tt {
