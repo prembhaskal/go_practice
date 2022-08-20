@@ -26,7 +26,8 @@ func cloneGraphDFSRec(node *Node) *Node {
 
 	nodecp := &Node{
 		Val:       node.Val,
-		Neighbors: make([]*Node, 0)}
+		Neighbors: make([]*Node, 0),
+	}
 	nodecopies[nodecp.Val] = nodecp
 
 	cloneGraphRec(node, visited, nodecopies)

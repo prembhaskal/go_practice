@@ -62,7 +62,6 @@ func addNext(iq *intq, curr locknode) {
 		prevlock[i] = prev
 		iq.add(locknode{lock: prevlock, ln: curr.ln + 1})
 	}
-
 }
 
 type intq struct {

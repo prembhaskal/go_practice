@@ -1,7 +1,9 @@
 package queue_stack
 
-import "strconv"
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func evalRPN(tokens []string) int {
 	stk := newrpnstack()

@@ -1,7 +1,6 @@
 package array
 
 func lengthOfLIS(nums []int) int {
-
 	if len(nums) == 0 {
 		return 0
 	}

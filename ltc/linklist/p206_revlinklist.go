@@ -45,7 +45,7 @@ func reverseRec(curr *ListNode) *ListNode {
 		return curr
 	}
 	next := curr.Next
-	head := reverseRec(next) //reverse remaining list
+	head := reverseRec(next) // reverse remaining list
 	// then next will be the new tail in that
 	// assign curr as tail.Next,
 	// also since curr is new tail set its next to null

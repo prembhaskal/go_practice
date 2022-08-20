@@ -92,7 +92,6 @@ func main() {
 }
 
 func getCustomResource(clientset *kubernetes.Clientset) {
-
 }
 
 func watchPods(clientset *kubernetes.Clientset) {

@@ -50,7 +50,6 @@ func (this *MyLinkedList) Get(idx int) int {
 	}
 
 	return -1
-
 }
 
 func (this *MyLinkedList) AddAtHead(val int) {

@@ -14,11 +14,12 @@ var primeRange int = 100000
 
 var primeList []int
 
-var br *bufio.Reader
-var bw *bufio.Writer
+var (
+	br *bufio.Reader
+	bw *bufio.Writer
+)
 
 func main() {
-
 	br = bufio.NewReader(os.Stdin)
 	bw = bufio.NewWriter(os.Stdout)
 
@@ -45,7 +46,6 @@ func main() {
 		}
 		fmt.Fprintln(bw)
 	}
-
 }
 
 func initPrimes() []int {

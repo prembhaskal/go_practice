@@ -1,8 +1,9 @@
 package queue_stack
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestEvalRPN(t *testing.T) {
@@ -14,5 +15,4 @@ func TestEvalRPN(t *testing.T) {
 	tokens = []string{"4", "13", "5", "/", "+"}
 	act = evalRPN(tokens)
 	assert.Equal(t, 6, act)
-
 }

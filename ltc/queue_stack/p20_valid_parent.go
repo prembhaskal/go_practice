@@ -1,7 +1,6 @@
 package queue_stack
 
 func isValid(s string) bool {
-
 	matchMap := make(map[rune]rune, 0)
 	matchMap[')'] = '('
 	matchMap['}'] = '{'

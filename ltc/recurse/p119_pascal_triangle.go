@@ -33,7 +33,6 @@ func getRowIter(rowIndex int) []int {
 			} else {
 				row[j] = prev[j-1] + prev[j]
 			}
-
 		}
 		prev = row
 	}

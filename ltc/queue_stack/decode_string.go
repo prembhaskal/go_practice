@@ -1,7 +1,9 @@
 package queue_stack
 
-import "strings"
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 func decodeString(s string) string {
 	// stack of strings

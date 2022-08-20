@@ -23,7 +23,6 @@ func dailyTemperatures(temperatures []int) []int {
 	}
 
 	return dist
-
 }
 
 type distnode struct {

@@ -11,6 +11,7 @@ package bintree
 func preorderTraversal(root *TreeNode) []int {
 	return preorderTraversalIter(root)
 }
+
 func preorderTraversalRec(root *TreeNode) []int {
 	if root == nil {
 		return nil

@@ -24,5 +24,4 @@ func main() {
 		time.Sleep(1 * time.Second)
 		fmt.Printf("hello from main\n")
 	}
-
 }

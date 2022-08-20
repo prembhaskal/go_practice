@@ -5,7 +5,6 @@ func isAnagram(s string, t string) bool {
 	freq2 := calcLetterFrequency(t)
 
 	for i := 0; i < 26; i++ {
-
 		if freq1[i] != freq2[i] {
 			return false
 		}

@@ -8,7 +8,6 @@ package linklist
  * }
  */
 func detectCycle(head *ListNode) *ListNode {
-
 	seen := make(map[*ListNode]bool, 0)
 
 	curr := head

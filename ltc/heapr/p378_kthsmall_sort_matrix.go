@@ -54,10 +54,12 @@ func (c *cells) Len() int {
 	cd := *c
 	return len(cd)
 }
+
 func (c *cells) Less(i, j int) bool {
 	cd := *c
 	return cd[i].val < cd[j].val
 }
+
 func (c *cells) Swap(i, j int) {
 	cd := *c
 	cd[i], cd[j] = cd[j], cd[i]

@@ -17,6 +17,7 @@ func swapPairs(head *ListNode) *ListNode {
 	// return swapPairsRec(head)
 	return swapiter(head)
 }
+
 func swapPairsRec(head *ListNode) *ListNode {
 	if head == nil {
 		return nil

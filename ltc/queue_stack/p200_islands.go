@@ -117,7 +117,6 @@ func doBFS(grid [][]byte) int {
 	}
 
 	return total
-
 }
 
 func searchByBFS(grid [][]byte, visited [][]bool, i, j int) {
@@ -139,7 +138,6 @@ func searchByBFS(grid [][]byte, visited [][]bool, i, j int) {
 		addToQueue(grid, nd.i, nd.j+1, nq)
 		addToQueue(grid, nd.i, nd.j-1, nq)
 	}
-
 }
 
 func addToQueue(grid [][]byte, i, j int, nq *nodequeue) {
@@ -193,7 +191,6 @@ func (q *nodequeue) isempty() bool {
 }
 
 func doDFS(grid [][]byte) int {
-
 	total := 0
 	seen := make([][]bool, len(grid))
 	for i := 0; i < len(grid); i++ {
@@ -211,7 +208,6 @@ func doDFS(grid [][]byte) int {
 	}
 
 	return total
-
 }
 
 func visitConnected(i, j int, grid [][]byte, seen [][]bool) {
@@ -240,5 +236,4 @@ func visitConnected(i, j int, grid [][]byte, seen [][]bool) {
 	visitConnected(i+1, j, grid, seen)
 	visitConnected(i, j-1, grid, seen)
 	visitConnected(i, j+1, grid, seen)
-
 }

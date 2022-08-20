@@ -5,7 +5,6 @@ import (
 )
 
 func TestTraverse(t *testing.T) {
-
 	n8 := &TreeNode{8, nil, nil}
 	n7 := &TreeNode{7, nil, nil}
 	n6 := &TreeNode{6, n7, n8}
@@ -29,5 +28,4 @@ func TestTraverse(t *testing.T) {
 	//       1              2
 	//   nil    6        3      nil
 	//       7    8   4    5
-
 }

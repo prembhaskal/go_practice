@@ -35,5 +35,4 @@ func TestSortArray(t *testing.T) {
 		fmt.Println()
 		fmt.Println()
 	}
-
 }

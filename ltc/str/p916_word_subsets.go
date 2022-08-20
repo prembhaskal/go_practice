@@ -21,7 +21,6 @@ func wordSubsets(words1 []string, words2 []string) []string {
 	}
 
 	return univ
-
 }
 
 // from all set, keep only the largest since that will decide.
