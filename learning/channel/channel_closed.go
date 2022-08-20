@@ -13,7 +13,7 @@ func main() {
 	done := make(chan bool)
 
 	go func() {
-		for {// check go channel is closed or not
+		for { // check go channel is closed or not
 			closed := false
 			select {
 			case _, ok := <-done:

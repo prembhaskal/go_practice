@@ -35,6 +35,25 @@ func reverseList(head *ListNode) *ListNode {
 	return prev
 }
 
+// returns the head of reversed list
+func reverseRec(curr *ListNode) *ListNode {
+	// fmt.Printf("current node: %d\n", curr.Val)
+	if curr == nil {
+		return nil
+	}
+	if curr.Next == nil {
+		return curr
+	}
+	next := curr.Next
+	head := reverseRec(next) //reverse remaining list
+	// then next will be the new tail in that
+	// assign curr as tail.Next,
+	// also since curr is new tail set its next to null
+	next.Next = curr
+	curr.Next = nil
+	return head
+}
+
 func reverseBy3ptrs(head *ListNode) *ListNode {
 	// prev ->  curr  -> next -> next1 -> next2 -> next3 -> NIL
 	// prev1 <- prev     curr -> next -> next2 -> next3 -> NIL
