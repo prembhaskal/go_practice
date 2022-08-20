@@ -21,6 +21,7 @@ install-build-deps:
 lint:
 	env GO111MODULE=off go fmt ./...
 	env GO111MODULE=on go vet -mod=vendor ./...
+	gofumports -w ./pkg/
 
 test: lint benchmark
 	mkdir -p builds
