@@ -3,7 +3,7 @@ package binsearchrot
 import (
 	"testing"
 
-	"github.com/prembhaskal/go_practice/util"
+	"github.com/prembhaskal/go_practice/pkg/util"
 )
 
 func TestRotateSearch(t *testing.T) {

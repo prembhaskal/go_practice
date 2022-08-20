@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/prembhaskal/go_practice/learning/parallel"
+	"github.com/prembhaskal/go_practice/pkg/learning/parallel"
 )
 
 func TestRaceTest1(t *testing.T) {
