@@ -32,10 +32,8 @@ func (e1 error1) Error() string {
 	return "this is error1"
 }
 
-type error2 struct {
+type error2 struct{}
 
-}
-
-func (e2 error2) Error() string  {
+func (e2 error2) Error() string {
 	return "this is error2"
 }
