@@ -4,8 +4,7 @@ func search(nums []int, target int) int {
 	return search2(nums, target)
 }
 
-
-//  HINT for better understand write all conditions (including start==mid || mid == end) first separately 
+//  HINT for better understand write all conditions (including start==mid || mid == end) first separately
 // and then merge the common conditions to arrive at below
 func search1(nums []int, target int) int {
 	start := 0

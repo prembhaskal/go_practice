@@ -1,7 +1,7 @@
 package binsearch
 
 // search solves https://leetcode.com/problems/binary-search/
-func search(nums []int, target int) int {
+func search704(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
 
