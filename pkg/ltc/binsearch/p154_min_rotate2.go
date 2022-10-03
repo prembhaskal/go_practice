@@ -1,5 +1,6 @@
 package binsearch
 
+// rotate array with duplicates present.
 func findMin2(nums []int) int {
 	//     4, 4, 4, 4, 4, 4, 1, 4, 4
 	//     6, 7, 8, 9, 1, 2, 3, 4, 5
