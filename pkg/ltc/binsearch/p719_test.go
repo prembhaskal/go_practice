@@ -5,14 +5,12 @@ import (
 	"testing"
 )
 
-// 1(1) 2(1-2) 3(1-2-3) 4(1-2-3-4) 5(1-2-3-4-5)
-func aTestBatchSizeSmallestDistancePair(t *testing.T) {
-	nums := make([]int, 20)
-	for k := 1; k <= 190; k++ {
-		// k := 190
-		batchnum := smallestDistancePair(nums, k)
-		fmt.Printf("k: %d, batch: %d\n", k, batchnum)
-		// fmt.Println()
+
+func TestPairCount(t *testing.T) {
+	nums := []int{1, 10, 10, 11, 15, 20}
+	for i := 0; i <= 19; i++ {
+		count := paircount(nums, i)
+		fmt.Printf("distance pair count less than equal to %d is %d\n", i, count)
 	}
 }
 
