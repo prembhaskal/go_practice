@@ -12,7 +12,7 @@ func TestSplitPossible(t *testing.T) {
 	isPos := checkMinSplitPossible(nums, subsum, m)
 	fmt.Printf("for nums: %v, sum: %d, split: %d, min split: %d\n", nums, subsum, m, isPos)
 
-	nums = []int{5,5,5,5}
+	nums = []int{5, 5, 5, 5}
 	subsum = 4
 	m = 4
 	isPos = checkMinSplitPossible(nums, subsum, m)
@@ -31,7 +31,7 @@ func TestSplitArray(t *testing.T) {
 	sum := splitArray(nums, m)
 	fmt.Printf("split array nums: %v, split: %d, sum: %d\n", nums, m, sum)
 
-	nums = []int{5,5,5,5}
+	nums = []int{5, 5, 5, 5}
 	m = 4
 	sum = splitArray(nums, m)
 	fmt.Printf("split array nums: %v, split: %d, sum: %d\n", nums, m, sum)
