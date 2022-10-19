@@ -2,6 +2,7 @@ package heapr
 
 import "fmt"
 
+// TODO - do using just array, O(n) time complexity
 func topKFrequent(nums []int, k int) []int {
 	hist := make(map[int]int)
 	for _, v := range nums {
@@ -13,6 +14,7 @@ func topKFrequent(nums []int, k int) []int {
 		numfreqs = append(numfreqs, newnumfreq(k, v))
 	}
 
+// klog(n) complexity / klog(k) complexity
 	mh := newheap347(numfreqs)
 	res := make([]int, 0)
 	for ; k > 0; k-- {
