@@ -24,7 +24,7 @@ func minMeetingRooms(intervals [][]int) int {
 	rooms := 0
 	for i := 0; i < len(data.ar); i++ {
 		curr := data.ar[i]
-        // check current time, if it is starting, add a room, if it is ending, free a room.
+		// check current time, if it is starting, add a room, if it is ending, free a room.
 		rooms = rooms + curr.cnt
 		if rooms > max {
 			max = rooms
@@ -45,7 +45,7 @@ func (s *sortintvs) Less(i, j int) bool {
 		return false
 	}
 
-// for same interval, keep ending slots before starting slots.
+	// for same interval, keep ending slots before starting slots.
 	return s.ar[i].cnt < s.ar[j].cnt
 	// return false
 }
