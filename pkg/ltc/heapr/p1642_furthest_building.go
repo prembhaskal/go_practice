@@ -15,13 +15,12 @@ func furthestBuilding(heights []int, bricks int, ladders int) int {
 
 func furthestMinHeap(heights []int, bricks, ladders int) int {
 	lh := newp1642heap(nil)
-
 	curr := 0
 out:
 	for ; curr < len(heights)-1; curr++ {
 		// check if climb
-		next := curr + 1
-		climb := heights[next] - heights[curr]
+		// next := curr + 1
+		climb := heights[curr+1] - heights[curr]
 		if climb <= 0 {
 			continue
 		}
@@ -33,19 +32,10 @@ out:
 		}
 
 		// no ladders, check if we can swap with ladder assignment
-		if lh.Size() > 0 {
+		if lh.Size() > 0 && climb > lh.peekMin() {
 			minLadder := lh.peekMin()
-			if climb > minLadder {
-				lh.extractMin()
-				lh.minHeapInsert(climb)
-
-				// reduce from bricks
-				if bricks < minLadder {
-					break out
-				}
-				bricks = bricks - minLadder
-				continue
-			}
+			lh.updateTop(climb)
+			climb = minLadder
 		}
 
 		// assign bricks if we have reached here
@@ -138,6 +128,11 @@ func (h *p1642heap) extractMin() int {
 	h.size--
 	h.minHeapify(1)
 	return min
+}
+
+func (h *p1642heap) updateTop(newmin int) {
+	h.ar[1] = newmin
+	h.minHeapify(1)
 }
 
 func (h *p1642heap) decreaseKey(idx, key int) {
