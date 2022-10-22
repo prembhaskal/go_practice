@@ -1,9 +1,61 @@
 package heapr
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func furthestBuilding(heights []int, bricks int, ladders int) int {
-	return furthestMinHeap(heights, bricks, ladders)
+	// return furthestMinHeap(heights, bricks, ladders)
+	return furthestBinSearch(heights, bricks, ladders)
+}
+
+// check if we are able to reach building n/2,
+// if yes, search from n/2+1, end
+// if no, search from 0 to n/2
+func furthestBinSearch(ht []int, br, ld int) int {
+	left := 0
+	right := len(ht) - 1
+	for left < right {
+		mid := left + (right-left+1)/2
+		if isBuildingReachable(ht, mid, br, ld) {
+			// fmt.Printf("building: %d, reachable\n", mid)
+			left = mid
+		} else {
+			// fmt.Printf("building: %d, not reachable\n", mid)
+			right = mid - 1
+		}
+	}
+
+	return left
+}
+
+func isBuildingReachable(ht []int, num, br, ld int) bool {
+	climbs := make([]int, 0)
+	for curr := 0; curr < num; curr++ {
+		climb := ht[curr+1] - ht[curr]
+		if climb > 0 {
+			climbs = append(climbs, climb)
+		}
+	}
+
+	sort.Sort(sort.Reverse(sort.IntSlice(climbs)))
+
+	// fmt.Printf("for building: %d, climbs: %d\n", num, climbs)
+
+	for i := 0; i < len(climbs); i++ {
+		if ld > 0 {
+			ld--
+			continue
+		}
+		br = br - climbs[i]
+		// fmt.Printf("for building: %d, remaining bricks: %d\n", num, br)
+		if br < 0 {
+			return false
+		}
+	}
+
+	return true
 }
 
 // heap based approach
