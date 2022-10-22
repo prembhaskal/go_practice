@@ -32,6 +32,8 @@ func furthestBinSearch(ht []int, br, ld int) int {
 
 func isBuildingReachable(ht []int, num, br, ld int) bool {
 	climbs := make([]int, 0)
+
+	// TODO: optimize, calculate this only once.
 	for curr := 0; curr < num; curr++ {
 		climb := ht[curr+1] - ht[curr]
 		if climb > 0 {
