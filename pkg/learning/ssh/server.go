@@ -1,8 +1,13 @@
 package main
 
 import (
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/x509"
+	"encoding/pem"
 	"fmt"
-	"io/ioutil"
+
+	// "io/ioutil"
 	"log"
 	"net"
 	"strings"
@@ -27,11 +32,15 @@ func main() {
 		},
 	}
 
-	privateBytes, err := ioutil.ReadFile("/home/prem/.ssh/id_rsa")
+	// privateBytes, err := ioutil.ReadFile("/home/prem/.ssh/id_rsa")
+	// if err != nil {
+	// 	log.Fatal("Failed to load private key: ", err)
+	// }
+	privateKey, _, err := GenerateKey(2048)
 	if err != nil {
-		log.Fatal("Failed to load private key: ", err)
+		log.Fatal("failed to generate key")
 	}
-
+	privateBytes := EncodePrivateKey(privateKey)
 	private, err := ssh.ParsePrivateKey(privateBytes)
 	if err != nil {
 		log.Fatal("Failed to parse private key: ", err)
@@ -41,10 +50,12 @@ func main() {
 
 	// Once a ServerConfig has been configured, connections can be
 	// accepted.
-	listener, err := net.Listen("tcp", "0.0.0.0:2022")
+	// listener, err := net.Listen("tcp", "0.0.0.0:2022")
+	listener, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		log.Fatal("failed to listen for connection: ", err)
 	}
+	log.Printf("listener started on %s\n", listener.Addr().String())
 	nConn, err := listener.Accept()
 	if err != nil {
 		log.Fatal("failed to accept incoming connection: ", err)
@@ -111,4 +122,19 @@ func main() {
 			}
 		}()
 	}
+}
+
+func GenerateKey(bits int) (*rsa.PrivateKey, *rsa.PublicKey, error) {
+	private, err := rsa.GenerateKey(rand.Reader, bits)
+	if err != nil {
+		return nil, nil, err
+	}
+	return private, &private.PublicKey, nil
+}
+
+func EncodePrivateKey(private *rsa.PrivateKey) []byte {
+	return pem.EncodeToMemory(&pem.Block{
+		Bytes: x509.MarshalPKCS1PrivateKey(private),
+		Type:  "RSA PRIVATE KEY",
+	})
 }

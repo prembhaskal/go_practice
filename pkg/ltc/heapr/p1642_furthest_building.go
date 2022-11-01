@@ -178,7 +178,7 @@ func (h *p1642heap) peekMin() int {
 func (h *p1642heap) extractMin() int {
 	min := h.ar[1]
 	h.ar[1] = h.ar[h.size]
-	h.ar[h.size] = min
+	h.ar[h.size] = min // WHY is this needed?
 	h.size--
 	h.minHeapify(1)
 	return min
