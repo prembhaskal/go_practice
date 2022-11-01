@@ -2,6 +2,8 @@ package heapr
 
 import "fmt"
 
+// TODO : try to solve using BST, people are solving with BST it seems
+
 type MedianFinder struct {
 	mh  *p295minheap
 	xh  *p295maxheap
