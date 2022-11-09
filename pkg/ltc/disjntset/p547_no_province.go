@@ -19,22 +19,25 @@ func findCircleNum(isConnected [][]int) int {
 
 	// fmt.Printf("ufind: %v\n", ufind.root)
 
-	uniqRoot := make(map[int]bool, 0)
-	cnt := 0
-	for i := 0; i < n; i++ {
-		rootI := ufind.findRoot(i)
-		if !uniqRoot[rootI] {
-			uniqRoot[rootI] = true
-			cnt++
-		}
-	}
+	//     uniqRoot := make(map[int]bool, 0)
+	//     cnt := 0
+	//     for i :=0; i < n; i++ {
+	//         rootI := ufind.findRoot(i)
+	//         if !uniqRoot[rootI] {
+	//             uniqRoot[rootI] = true
+	//             cnt++
+	//         }
+	//     }
 
-	return cnt
+	//     return cnt
+
+	return ufind.getCount()
 }
 
 type p547UF struct {
-	root []int
-	rank []int
+	root  []int
+	rank  []int
+	count int
 }
 
 func newp547UF(n int) *p547UF {
@@ -43,8 +46,9 @@ func newp547UF(n int) *p547UF {
 		root[i] = i
 	}
 	return &p547UF{
-		root: root,
-		rank: make([]int, n),
+		root:  root,
+		rank:  make([]int, n),
+		count: n,
 	}
 }
 
@@ -72,5 +76,10 @@ func (u *p547UF) union(x, y int) {
 			u.root[rootY] = rootX
 			u.rank[rootX] = u.rank[rootX] + 1
 		}
+		u.count--
 	}
+}
+
+func (u *p547UF) getCount() int {
+	return u.count
 }
