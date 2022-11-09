@@ -1,5 +1,8 @@
 package disjntset
 
+// use union find.
+// check when adding to union, if already connected , return false
+// at the end, all should be connected, else return false.
 func validTree(n int, edges [][]int) bool {
 	ufind := newP261UF(n)
 	for _, edge := range edges {
