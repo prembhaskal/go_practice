@@ -11,7 +11,7 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 
 	rootList := make(map[int][]int, 0)
 	for i := 0; i < len(s); i++ {
-		rt := ufind.root[i]
+		rt := ufind.findroot(i)
 		list := rootList[rt]
 		list = append(list, i)
 		rootList[rt] = list
