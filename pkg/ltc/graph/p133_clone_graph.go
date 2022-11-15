@@ -1,4 +1,4 @@
-package queue_stack
+package graph
 
 /**
  * Definition for a Node.
