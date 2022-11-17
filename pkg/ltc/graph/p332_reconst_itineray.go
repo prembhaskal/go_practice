@@ -6,6 +6,7 @@ import (
 )
 
 // TODO - do using https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/ algorithm.
+// Current approach - backtracking + greedy ( discard bad solutions early)
 func findItinerary(tickets [][]string) []string {
 	//     JFK -> [ATL|cross,  SFO|cross]
 
@@ -31,48 +32,19 @@ func findItinerary(tickets [][]string) []string {
 		graph[k] = v
 	}
 
-	allpaths := make([][]string, 0)
 	currpath := []string{"JFK"}
 
-	allpaths, _ = dfspaths(len(tickets)+1, graph, currpath, allpaths, visited)
-	fmt.Printf("allpaths: %v\n", allpaths)
-
-	validpaths := make([][]string, 0)
-	for _, path := range allpaths {
-		if len(path) == len(tickets)+1 {
-			validpaths = append(validpaths, path)
-		}
-	}
-
-	sort.Slice(validpaths, func(i, j int) bool {
-		path1 := validpaths[i]
-		path2 := validpaths[j]
-
-		for k := 0; k < len(path1); k++ {
-			if path1[k] < path2[k] {
-				return true
-			} else if path1[k] > path2[k] {
-				return false
-			}
-		}
-
-		return false
-	})
-
-	fmt.Printf("sorted valid paths: %v\n", validpaths)
-
-	return validpaths[0]
+	bestpath, _ := dfspaths(len(tickets)+1, graph, currpath, visited)
+	fmt.Printf("bestpath: %v\n", bestpath)
+	return bestpath
 }
 
-func dfspaths(explen int, graph map[string][]string, currpath []string, allpaths [][]string, visited map[p332edge]int) ([][]string, bool) {
+func dfspaths(explen int, graph map[string][]string, currpath []string, visited map[p332edge]int) ([]string, bool) {
 	currnode := currpath[len(currpath)-1]
 	fmt.Printf("visiting node : %s\n", currnode)
 
 	if len(currpath) == explen {
-		newpath := make([]string, len(currpath))
-		copy(newpath, currpath)
-		allpaths = append(allpaths, newpath)
-		return allpaths, true
+		return currpath, true
 	}
 
 	nextnodes := graph[currnode]
@@ -88,22 +60,16 @@ func dfspaths(explen int, graph map[string][]string, currpath []string, allpaths
 		copy(newpath, currpath)
 		newpath = append(newpath, next)
 
-		var alldone bool
-		allpaths, alldone = dfspaths(explen, graph, newpath, allpaths, visited)
+		// var alldone bool
+		finalpath, alldone := dfspaths(explen, graph, newpath, visited)
 		visited[edge]++
 
 		if alldone {
-			return allpaths, true
+			return finalpath, true
 		}
 	}
 
-	// if allpathsdone {
-	// 	newpath := make([]string, len(currpath))
-	// 	copy(newpath, currpath)
-	// 	allpaths = append(allpaths, newpath)
-	// }
-
-	return allpaths, false
+	return currpath, false
 }
 
 type p332edge struct {
