@@ -22,6 +22,7 @@ func pathexistdfs(graph map[int][]int, visited []int, src, dest int) bool {
 		if visited[src] == 1 {
 			return false // this is cycle
 		}
+		// reuse memoization, that visited value is 2.
 		return true // already processed earlier, it will dest. from there.
 	}
 
@@ -49,7 +50,7 @@ func pathexistdfs(graph map[int][]int, visited []int, src, dest int) bool {
 		}
 	}
 
-	visited[src] = 2 // node processed
+	visited[src] = 2 // node processed, this is similiar to memoization.
 
 	return true
 }
