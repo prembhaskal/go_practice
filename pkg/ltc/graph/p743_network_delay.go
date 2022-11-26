@@ -6,53 +6,55 @@ import (
 )
 
 func networkDelayTime(times [][]int, n int, k int) int {
-	// times[i] = [src, dest, weight]
+	// times[i] = [src, dest, weight]  <- from question
 	// n nodes
+	// k source
+
 	// init source
 	inf := math.MaxInt
-	vtxMap := make(map[int]*vtx743)
-	vertices := make([]*vtx743, 0)
+	// vtxMap := make(map[int]*vtx743)
+	vertices := make([]*vtx743, n+1)
 	for i := 1; i <= n; i++ {
 		vtx := &vtx743{i, inf}
-		vtxMap[i] = vtx
-		vertices = append(vertices, vtx)
-		// fmt.Printf("add vertex: %v\n", vtx)
+		// vtxMap[i] = vtx
+		vertices[i] = vtx
 	}
 
-	// wgtmap := make(map[edge743]int)
 	adj := make(map[int][]edge743)
 	for _, time := range times {
 		frm := time[0]
 		to := time[1]
 		dst := time[2]
 		adj[frm] = append(adj[frm], edge743{to: to, dst: dst})
-		// wgtmap[edge743{frm, to}] = dst
 	}
 
-	vtxMap[k].d = 0
+	vertices[k].d = 0
 
 	visited := make(map[int]bool)
 
-	minq := newmheap743(vertices)
+	minq := newmheap743(vertices[1:])
 
 	// minq.print()
 
+	// as per CLRS,
+	// visited Set
+	// add all to Q
+	// for Q.is_not_empty
+	// u = Q.extractmin
+	// for edge (u,v) from adj[u]
+	// Relax(u, v, w)
 	for minq.size > 0 {
 		u := minq.extractmin()
 		// fmt.Printf("extract min is %v\n", u)
 		visited[u.num] = true
 		for _, e := range adj[u.num] {
-			if visited[e.to] {
+			if visited[e.to] { // this was not mentioned in CLR
 				continue
 			}
 			// relax(u, v)
-			v := vtxMap[e.to]
+			v := vertices[e.to]
 			// fmt.Printf("next edge, before: %v\n", v)
-			// if v.d > u.d+wgtmap[edge743{u.num, v.num}] {
-			// 	v.d = u.d + wgtmap[edge743{u.num, v.num}]
-			// 	minq.decreasekey(v.num, v.d)
-			// }
-			if v.d > u.d + e.dst {
+			if v.d > u.d+e.dst {
 				v.d = u.d + e.dst
 				minq.decreasekey(v.num, v.d)
 			}
@@ -61,16 +63,9 @@ func networkDelayTime(times [][]int, n int, k int) int {
 		}
 	}
 
-	// visited Set
-	// add all to Q
-	// for Q.is_not_empty
-	// u = Q.extractmin
-	// for edge (u,v) from adj[u]
-	// Relax(u, v, w)
-
 	// loop through all to find the max
 	max := -1
-	for _, vtx := range vertices {
+	for _, vtx := range vertices[1:] {
 		if max < vtx.d {
 			max = vtx.d
 		}
@@ -84,8 +79,7 @@ func networkDelayTime(times [][]int, n int, k int) int {
 }
 
 type edge743 struct {
-	from int
-	to   int
+	to  int
 	dst int
 }
 
