@@ -134,12 +134,12 @@ func dijkstraCLRSHeapInsert(times [][]int, n int, k int) int {
 			if visited[e.to] { // this was not mentioned in CLR
 				continue
 			}
-			// relax(u, v)
 			v := vertices[e.to]
 			if !minq.contains(v) {
 				minq.heapInsert(v)
 			}
 			// fmt.Printf("next edge, before: %v\n", v)
+			// relax(u, v)
 			if v.d > u.d+e.dst {
 				v.d = u.d + e.dst
 				minq.decreasekey(v.num, v.d)
