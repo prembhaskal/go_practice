@@ -1,7 +1,51 @@
 package graph
 
 func findOrder(numCourses int, prerequisites [][]int) []int {
-	return tsortKhanAlgo(numCourses, prerequisites)
+	// return tsortKahnAlgo(numCourses, prerequisites)
+	return tsortDFS(numCourses, prerequisites)
+}
+
+func tsortDFS(n int, prereq [][]int) []int {
+	adjlist := make([][]int, n)
+	for _, edge := range prereq {
+		from := edge[0]
+		to := edge[1]
+		adjlist[from] = append(adjlist[from], to)
+	}
+
+	tsort := make([]int, n)
+
+	visited := make([]bool, n)
+	for i := 0; i < n; i++ {
+		if !visited[i] {
+			dfs210(i, adjlist, visited, tsort)
+		}
+	}
+
+	if len(tsort) != n {
+		return nil
+	}
+	return rev210(tsort)
+}
+
+func rev210(x []int) []int {
+	i := 0
+	j := len(x) - 1
+	for i < j {
+		x[i], x[j] = x[j], x[i]
+	}
+	return x
+}
+
+func dfs210(x int, adjlist [][]int, visited []bool, tsort []int) {
+	visited[x] = true
+	for _, next := range adjlist[x] {
+		if !visited[next] {
+			dfs210(next, adjlist, visited, tsort)
+		}
+	}
+
+	tsort = append(tsort, x)
 }
 
 func tsortKahnAlgo(numCourses int, prerequisites [][]int) []int {
