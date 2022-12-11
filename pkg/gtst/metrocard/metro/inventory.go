@@ -4,14 +4,14 @@ import "fmt"
 
 type Inventory struct {
 	passType map[string]PassengerType
-	cards    map[string]*Card
+	cards    map[string]*TravelCard
 	stations map[string]*Station
 }
 
 func NewInventory() *Inventory {
 	inv := &Inventory{
 		passType: make(map[string]PassengerType),
-		cards:    make(map[string]*Card),
+		cards:    make(map[string]*TravelCard),
 		stations: make(map[string]*Station),
 	}
 	inv.AddDefaultStations()
@@ -29,26 +29,30 @@ func (i *Inventory) AddPassengerTypes() {
 }
 
 func (i *Inventory) AddDefaultStations() {
-	airport := &Station{
-		Name:              "AIRPORT",
-		ServiceFeePercent: 2,
-		ReturnDiscount:    50,
-	}
-	i.stations[airport.Name] = airport
+	discounts := make([]RideDiscount, 0)
+	discounts = append(discounts, NewReturnJourneyDiscount(50.0))
 
-	central := &Station{
-		Name:              "CENTRAL",
-		ServiceFeePercent: 2,
-		ReturnDiscount:    50,
-	}
-	i.stations[central.Name] = central
+	// airport := &Station{
+	// 	Name:              "AIRPORT",
+	// 	ServiceFeePercent: 2,
+	// 	ReturnDiscount:    50,
+	// }
+	// i.stations[airport.Name] = airport
+	i.stations["AIRPORT"] = NewStation("AIRPORT", discounts)
+
+	// central := &Station{
+	// 	Name:              "CENTRAL",
+	// 	ServiceFeePercent: 2,
+	// 	ReturnDiscount:    50,
+	// }
+	i.stations["CENTRAL"] = NewStation("CENTRAL", discounts)
 }
 
-func (i *Inventory) AddCard(card *Card) {
+func (i *Inventory) AddCard(card *TravelCard) {
 	i.cards[card.ID] = card
 }
 
-func (i *Inventory) GetCard(id string) *Card {
+func (i *Inventory) GetCard(id string) *TravelCard {
 	return i.cards[id]
 }
 

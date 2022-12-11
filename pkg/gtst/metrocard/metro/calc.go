@@ -1,3 +1,10 @@
 package metro
 
-type RateCalculator struct{}
+type RideCalculator struct {
+	
+}
+
+
+
+
+

@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/prembhaskal/go_practice/pkg/gtst/metrocard/metro"
+	"geektrust/metro"
 )
 
 func main() {
@@ -33,13 +33,6 @@ func main() {
 	inventory := metro.NewInventory()
 
 	for scanner.Scan() {
-		/*
-			args := scanner.Text()
-			argList := strings.Fields(args)
-
-			Add your code here to process the input commands
-		*/
-
 		inputType := scanner.Text()
 		switch inputType {
 		case "BALANCE":
@@ -77,8 +70,8 @@ func checkIn(scanner *bufio.Scanner, inventory *metro.Inventory) {
 	stationName := GetNextWord(scanner)
 
 	card := inventory.GetCard(cardID)
-	fromStation := inventory.GetStation(stationName)
 	passType := inventory.GetPassType(passTypeName)
+	fromStation := inventory.GetStation(stationName)
 	toStation := inventory.GetToStation(stationName)
 
 	fromStation.CheckIn(card, passType, toStation.Name)
@@ -90,15 +83,11 @@ func printSummary(inventory *metro.Inventory) {
 	defer bw.Flush()
 
 	central := inventory.GetStation("CENTRAL")
-	central.PrintSummary(bw)
+	metro.PrintSummary(central, bw)
 	airport := inventory.GetStation("AIRPORT")
-	airport.PrintSummary(bw)
+	metro.PrintSummary(airport, bw)
 }
 
 func addCard(inventory *metro.Inventory, id string, balance float64) {
-	card := &metro.Card{
-		ID:      id,
-		Balance: balance,
-	}
-	inventory.AddCard(card)
+	inventory.AddCard(metro.NewTravelCard(id, balance))
 }
