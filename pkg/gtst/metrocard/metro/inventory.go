@@ -31,20 +31,7 @@ func (i *Inventory) AddPassengerTypes() {
 func (i *Inventory) AddDefaultStations() {
 	discounts := make([]RideDiscount, 0)
 	discounts = append(discounts, NewReturnJourneyDiscount(50.0))
-
-	// airport := &Station{
-	// 	Name:              "AIRPORT",
-	// 	ServiceFeePercent: 2,
-	// 	ReturnDiscount:    50,
-	// }
-	// i.stations[airport.Name] = airport
 	i.stations["AIRPORT"] = NewStation("AIRPORT", discounts)
-
-	// central := &Station{
-	// 	Name:              "CENTRAL",
-	// 	ServiceFeePercent: 2,
-	// 	ReturnDiscount:    50,
-	// }
 	i.stations["CENTRAL"] = NewStation("CENTRAL", discounts)
 }
 

@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"geektrust/metro"
+	"github.com/prembhaskal/go_practice/pkg/gtst/metrocard/metro"
 )
 
 func main() {

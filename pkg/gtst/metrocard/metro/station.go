@@ -29,12 +29,6 @@ func NewStation(name string, discounts []RideDiscount) *Station {
 }
 
 func (s *Station) CheckIn(card *TravelCard, passType PassengerType, toStn string) {
-	// update card journey
-	// newJourney := &Journey{
-	// 	FromStn:    s.Name,
-	// 	ToStn:      toStn,
-	// 	Discounted: travelDetail.Discount > 0,
-	// }
 	card.InitiateNewJourney(s.Name, toStn)
 
 	travelDetail := &TravelDetail{
@@ -54,12 +48,11 @@ func (s *Station) CheckIn(card *TravelCard, passType PassengerType, toStn string
 
 	// card.AddJourney(newJourney)
 	card.CompleteJourney()
-	
+
 	// update travel details.
 	s.TravelDetails = append(s.TravelDetails, travelDetail)
 }
 
-// TODO - should we move it to card??
 func (s *Station) RechargeCard(travelDetail *TravelDetail) {
 	card := travelDetail.Card
 	if card.GetBalance() >= travelDetail.Charge {
@@ -69,8 +62,6 @@ func (s *Station) RechargeCard(travelDetail *TravelDetail) {
 	card.Recharge(recharge)
 
 	travelDetail.OtherFees += s.getServiceCharges(recharge)
-
-	// fmt.Printf("recharge done for %f, fees is %f\n", recharge, travelDetail.OtherFees)
 }
 
 func (s *Station) applyDiscounts(rideDetail *TravelDetail) {
