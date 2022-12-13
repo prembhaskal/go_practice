@@ -20,4 +20,3 @@ func (r *ReturnJourneyDiscount) Apply(travelDetail *TravelDetail) {
 		travelDetail.Discount += discount
 	}
 }
-
