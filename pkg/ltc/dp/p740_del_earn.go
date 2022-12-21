@@ -5,7 +5,9 @@ import "sort"
 func deleteAndEarn(nums []int) int {
 	// return deleteAndEarnRec(nums)
 	// return deleteAndEarnIter1(nums)
-	return deleteAndEarnIter2(nums)
+	// return deleteAndEarnIter2(nums)
+	// return deleteAndEarnIterLast(nums)
+	return deleteAndEarnRec2(nums)
 }
 
 func deleteAndEarnIter1(nums []int) int {
@@ -19,8 +21,6 @@ func deleteAndEarnIter1(nums []int) int {
 		maxnum = max740(maxnum, v)
 	}
 
-	// take[i] = ar[i] + skip[i-1]
-	// skip[i] = max(skip[i-1], take[i-1])
 	for i := 1; i <= maxnum; i++ {
 		pick[i] = ar[i] + skip[i-1]
 		skip[i] = max740(skip[i-1], pick[i-1])
@@ -50,6 +50,86 @@ func deleteAndEarnIter2(nums []int) int {
 	return max740(pick, skip)
 }
 
+// start from last and move towards first
+func deleteAndEarnRec2(nums []int) int {
+	sort.Ints(nums)
+	gain := make(map[int]int)
+	ar := make([]int, 0)
+	for _, v := range nums {
+		if gain[v] == 0 {
+			ar = append(ar, v)
+		}
+		gain[v] = gain[v] + v
+	}
+
+	mem := make([]int, len(nums))
+	for i, _ := range mem {
+		mem[i] = -1
+	}
+
+	return deleteAndEarnRecMem2(0, ar, mem, gain)
+}
+
+func deleteAndEarnRecMem2(idx int, ar, mem []int, gain map[int]int) int {
+	if idx >= len(ar) {
+		return 0
+	}
+	if mem[idx] != -1 {
+		return mem[idx]
+	}
+	curr := ar[idx]
+	next := -1
+	if idx+1 < len(ar) {
+		next = ar[idx+1]
+	}
+
+	if curr != next-1 {
+		mem[idx] = deleteAndEarnRecMem2(idx+1, ar, mem, gain) + gain[curr]
+	} else {
+		mem[idx] = max740(deleteAndEarnRecMem2(idx+2, ar, mem, gain)+gain[curr], deleteAndEarnRecMem2(idx+1, ar, mem, gain))
+	}
+	return mem[idx]
+}
+
+func deleteAndEarnIterLast(nums []int) int {
+	sort.Ints(nums)
+	gain := make(map[int]int)
+	ar := make([]int, 0)
+	for _, v := range nums {
+		if gain[v] == 0 {
+			ar = append(ar, v)
+		}
+		gain[v] = gain[v] + v
+	}
+
+	// start from last and move towards first
+	// [curr] ...[curr+1, curr+2, ...]
+
+	// if curr != next - 1 , then V[curr] = V[curr+1] + gain[curr] // we can choose both current and next.
+	// else , V[curr] = max(V[curr+2], gain[curr]  /*choose current*/ , V[curr+1] /*dont choose current*/  )
+
+	n := len(ar)
+	V := make([]int, n+1)
+	for i := n - 1; i >= 0; i-- {
+		next := -1
+		if i+1 < n {
+			next = ar[i+1]
+		}
+		curr := ar[i]
+		if curr != next-1 {
+			V[i] = V[i+1] + gain[curr]
+		} else {
+			V[i] = -1
+			if i+2 <= n {
+				V[i] = max740(V[i+2]+gain[curr], V[i+1])
+			} else {
+				V[i] = V[i+1]
+			}
+		}
+	}
+	return V[0]
+}
+
 func deleteAndEarnRec(nums []int) int {
 	sort.Ints(nums)
 	freqmap := make(map[int]int)
@@ -67,6 +147,7 @@ func deleteAndEarnRec(nums []int) int {
 	return delEarnRec(newar, freqmap, 0, mem)
 }
 
+// this has become too cryptic, check above solutions which are better.
 func delEarnRec(ar []int, freqmap map[int]int, idx int, mem map[int]int) int {
 	if idx >= len(ar) {
 		return 0
