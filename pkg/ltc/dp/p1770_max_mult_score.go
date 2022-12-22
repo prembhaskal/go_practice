@@ -1,5 +1,6 @@
 package dp
 
+// TODO - add bottom up approach too, with optimal mem usage
 func maximumScore(nums []int, multipliers []int) int {
 	return maxScoreRecFunc(nums, multipliers)
 }
