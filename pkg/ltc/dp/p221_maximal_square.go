@@ -7,6 +7,7 @@ var (
 	zero byte = '0'
 )
 
+// TODO - reduce space complexity.
 func maximalSquare(matrix [][]byte) int {
 	rows := len(matrix)
 	cols := len(matrix[0])
