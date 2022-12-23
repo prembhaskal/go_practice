@@ -9,6 +9,54 @@ var (
 
 // TODO - reduce space complexity.
 func maximalSquare(matrix [][]byte) int {
+	// return maximalSquare1(matrix)
+	return maxSquareRec1(matrix)
+}
+
+var maxsqsize int
+
+func maxSquareRec1(mat [][]byte) int {
+	maxsqsize = 0
+	m := len(mat)
+	n := len(mat[0])
+	dp := make([][]int, m)
+	for i := 0; i < m; i++ {
+		dp[i] = make([]int, n)
+		for j := 0; j < n; j++ {
+			dp[i][j] = -1
+		}
+	}
+	maxSquareRec(mat, m-1, n-1, dp)
+	return maxsqsize * maxsqsize
+}
+
+// returns the square size ending at vertex (r,c)
+func maxSquareRec(mat [][]byte, r, c int, dp [][]int) int {
+	// fmt.Printf("r: %d, c: %d\n", r, c)
+	if r < 0 || c < 0 {
+		return 0
+	}
+	if dp[r][c] != -1 {
+		return dp[r][c]
+	}
+
+	// we traverse below squares too irrespective of whether current cell is '1' or '0'
+	diag := maxSquareRec(mat, r-1, c-1, dp)
+	vert := maxSquareRec(mat, r-1, c, dp)
+	horz := maxSquareRec(mat, r, c-1, dp)
+	var res int
+	if mat[r][c] == one {
+		res = 1 + min3(diag, vert, horz)
+		if res > maxsqsize { // capture max size seen till now
+			maxsqsize = res
+		}
+	}
+	dp[r][c] = res
+	// fmt.Printf("r:%d, c:%d, res: %d\n", r, c, dp[r][c])
+	return dp[r][c]
+}
+
+func maximalSquare1(matrix [][]byte) int {
 	rows := len(matrix)
 	cols := len(matrix[0])
 	msq := make([][]int, rows)
