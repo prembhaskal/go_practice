@@ -15,6 +15,7 @@ func maximalSquare(matrix [][]byte) int {
 
 var maxsqsize int
 
+// TODO - convert this top-down to a better bottom-up approach.
 func maxSquareRec1(mat [][]byte) int {
 	maxsqsize = 0
 	m := len(mat)
