@@ -5,6 +5,7 @@ func rob2(nums []int) int {
 	if n == 1 {
 		return nums[0]
 	}
+	// rob first, then skip last OR skip first, then consider last
 	return max213(rob1(nums[0:n-1]), rob1(nums[1:n]))
 }
 
