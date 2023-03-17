@@ -9,6 +9,8 @@ func minimumDifference(nums []int) int {
 }
 
 var inf int = 1000000000 // 10 ^ 9
+
+// TODO - time limit exceed, optimize
 func f2035(nums []int, curr, n1, s1, n2, s2 int) int {
 	// fmt.Printf("debug, s1: %d, n1: %d, s2: %d, n2: %d, curr: %d\n", s1, n1, s2, n2, curr)
 	if curr == len(nums) {
