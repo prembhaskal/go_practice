@@ -21,6 +21,9 @@ import (
 //  $ env GOOS=windows GOARCH=amd64 go build -o /tmp/fsclean.exe clean.go
 //  # run in git bash
 //  $ env DELETE_PATH="C:\\Users\\bhaskal\\Downloads\\" DELETE_DAYS="600" ./fsclean.exe | tee cleaner.txt 
+// 
+// PROBLEMS
+// 1. It cannot remove empty directories yet. the walk function does not have postvisit functionality unlike Java
 func main() {
 	now := time.Now()
 	fmt.Printf("fs cleaner started : %s\n", now.Format(time.RFC3339))
