@@ -20,8 +20,8 @@ import (
 // how to build for windows
 //  $ env GOOS=windows GOARCH=amd64 go build -o /tmp/fsclean.exe clean.go
 //  # run in git bash
-//  $ env DELETE_PATH="C:\\Users\\bhaskal\\Downloads\\" DELETE_DAYS="600" ./fsclean.exe | tee cleaner.txt 
-// 
+//  $ env DELETE_PATH="C:\\Users\\bhaskal\\Downloads\\" DELETE_DAYS="600" ./fsclean.exe | tee cleaner.txt
+//
 // PROBLEMS
 // 1. It cannot remove empty directories yet. the walk function does not have postvisit functionality unlike Java
 func main() {
@@ -69,7 +69,6 @@ func verifyDir(dirpath string) {
 	if !dirinfo.IsDir() {
 		panic(fmt.Sprintf("dir %s is not a directory", dirpath))
 	}
-
 }
 
 // type WalkDirFunc func(path string, d DirEntry, err error) error
