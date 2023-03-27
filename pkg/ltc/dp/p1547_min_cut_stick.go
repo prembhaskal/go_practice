@@ -5,6 +5,9 @@ func minCost(n int, cuts []int) int {
 	return minCostRec(0, n, cuts, dp)
 }
 
+// TODO - optimize by using indices of cuts instead of string to run it faster
+// DP[i][j] = min cost for cutting between cuts[i] and cuts[j] (both not included ??)
+// which is equal to (cuts[j] - cuts[i]) + DP[i][k] + DP[k][j] where k ranges from i + 1 to j - 1
 func minCostRec(start, end int, cuts []int, dp map[pair1547]int) int {
 	if start >= end {
 		return 0
