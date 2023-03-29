@@ -37,9 +37,12 @@ func splitArray(nums []int, m int) int {
 // check the minimum split possible, to achieve the sum.
 // for eg. [2, 2, 2, 2, 2, 2, 2, 2, 2, 2] -- 10 items
 // for max_sum=4, min split possible is 5 times (each having 2 items), we cannot have fewer splits.
-//     for max_sum = 3 or less, min split possible would be higher than 5.
+//
+//	for max_sum = 3 or less, min split possible would be higher than 5.
+//
 // for max_sum=8, min split possible is 3 times ([2,2,2,2] [2,2,2,2] [2,2])
-//     for max_sum >= 9, min split possible is at max 3 times.
+//
+//	for max_sum >= 9, min split possible is at max 3 times.
 func checkMinSplitPossible(nums []int, largesum, m int) int {
 	splits := 0
 	sum := 0

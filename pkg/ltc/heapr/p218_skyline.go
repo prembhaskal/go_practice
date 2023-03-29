@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-//  TODO - accepted, but optimize here.
+// TODO - accepted, but optimize here.
 func getSkyline(buildings [][]int) [][]int {
 	// approach
 	allpts := make([]point, 0)

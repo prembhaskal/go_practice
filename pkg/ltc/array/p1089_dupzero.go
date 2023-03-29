@@ -23,7 +23,8 @@ package array
 // 	if 0, fill twice, reduce j twice
 // 	if 1, fill once, reduce j once
 
-// 	reduce i
+//	reduce i
+//
 // TODO - optimize / simplify further.
 func duplicateZeros(arr []int) {
 	// find no. of zeroes within array.

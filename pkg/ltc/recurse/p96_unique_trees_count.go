@@ -44,7 +44,8 @@ func numTreesRecMem(start, end int, mem [][]int) int {
 }
 
 // generate element with root 1 ... m - 1 , m .. m+1 ... n
-//  lefttree root righttree
+//
+//	lefttree root righttree
 func numTreesRec(start, end int) int {
 	if start > end {
 		return 0
