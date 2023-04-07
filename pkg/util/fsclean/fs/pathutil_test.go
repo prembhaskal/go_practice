@@ -16,7 +16,7 @@ func TestPathUtil(t *testing.T) {
 	cfs.WalkDir("/tmp/prem", &pvisit)
 }
 
-type printvisit struct{
+type printvisit struct {
 	pad int
 }
 
@@ -36,7 +36,7 @@ func (p *printvisit) Postvisit(path string, d fs.DirEntry, err error) error {
 	for i := 0; i < p.pad; i++ {
 		sb.WriteString(" ")
 	}
-	
+
 	fmt.Printf("%s Post Visit: %s\n", sb.String(), path)
 	p.pad--
 	return nil
