@@ -14,14 +14,13 @@ LINTERS := \
 
 PACKAGES = $(shell go list ./... | grep -v /vendor/)
 
-
-install-build-deps:
-	go install -v $(LINTERS)
-
 lint:
 	env GO111MODULE=off go fmt ./...
 	env GO111MODULE=on go vet -mod=vendor ./...
 	gofumports -w ./pkg/
+
+install-build-deps:
+	go install -v $(LINTERS)
 
 test: lint benchmark
 	mkdir -p builds
