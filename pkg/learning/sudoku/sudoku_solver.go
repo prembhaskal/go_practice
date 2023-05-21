@@ -6,16 +6,79 @@ import (
 )
 
 // grid is divided into 9 parts, each part of 9 cells each
-// [0, 1 , 2]
-// [3, 4 , 5]
-// [6, 7 , 8]
+// [0, 1, 2]
+// [3, 4, 5]
+// [6, 7, 8]
 type Grid struct {
-	Ar [][]int
+	Ar    [][]int
+	Cells [][]*Cell
+}
+
+type Cell struct {
+	Row     int
+	Col     int
+	Valid   Set
+	InValid Set
+	Val     int
 }
 
 type Set map[int]int
 
 var Debug = false
+
+func UpdateCellsWithMeta(grid *Grid) {
+	// invalid not used for now
+
+	initCellsInGrid(grid)
+	addEmptyCellInGrid(grid)
+	updateValidsInGrid(grid)
+}
+
+func updateValidsInGrid(grid *Grid) {
+	// for every empty cell
+	//   update valid cells in the partnum, row and col
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			cell := grid.Cells[r][c]
+			if cell.Val == 0 {
+				cell.Valid = GetAllElemsSet()
+			}
+		}
+	}
+}
+
+func addEmptyCellInGrid(grid *Grid) {
+	// for the Grid, initiate the Cell
+	// for non empty cell, fill only val
+	// for every empty cell, first fill the default valid
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			cell := &Cell{
+				Row: r,
+				Col: c,
+				Val: grid.Ar[r][c],
+			}
+
+			grid.Cells[r][c] = cell
+		}
+	}
+}
+
+func initCellsInGrid(grid *Grid) {
+	cells := make([][]*Cell, 9)
+	for i := 0; i < 9; i++ {
+		cells[i] = make([]*Cell, 9)
+	}
+	grid.Cells = cells
+}
+
+func GetAllElemsSet() Set {
+	mp := make(map[int]int)
+	for n := 1; n <= 9; n++ {
+		mp[n] = 1
+	}
+	return mp
+}
 
 func SolveSingleCell(grid *Grid) {
 	for r := 0; r < 9; r++ {
@@ -24,7 +87,7 @@ func SolveSingleCell(grid *Grid) {
 
 			// check only empty cells
 			if val != 0 {
-				continue 
+				continue
 			}
 
 			relems := FindElementsInRow(grid, r)
@@ -55,7 +118,7 @@ func FindFirstKey(set Set) int {
 	panic("empty set")
 }
 
-func FindMissingInSet(set Set) Set{
+func FindMissingInSet(set Set) Set {
 	miss := make(map[int]int)
 	for n := 1; n <= 9; n++ {
 		if _, ok := set[n]; !ok {
@@ -96,7 +159,6 @@ func FindElementsInCol(grid *Grid, col int) Set {
 	return elems
 }
 
-
 func FindElementsInPart(grid *Grid, partnum int) Set {
 	roff, coff := FindStartCell(partnum)
 	elems := make(map[int]int)
@@ -105,13 +167,12 @@ func FindElementsInPart(grid *Grid, partnum int) Set {
 			row := r + roff
 			col := c + coff
 			val := grid.Ar[row][col]
-			elems[val]++	
+			elems[val]++
 		}
 	}
 
 	return elems
 }
-
 
 // returns the top,left cell for the given part
 // panics for out of bounds part
@@ -120,10 +181,10 @@ func FindStartCell(partnum int) (int, int) {
 		panic(fmt.Sprintf("partnum out of bounds: %d", partnum))
 	}
 
-	row := partnum/3 // truncates towards 3
-	row = row * 3    // gets the boundary
+	row := partnum / 3 // truncates towards 3
+	row = row * 3      // gets the boundary
 
-	col := (partnum % 3 ) * 3
+	col := (partnum % 3) * 3
 
 	return row, col
 }

@@ -159,9 +159,8 @@ func TestFindElementsInPart(t *testing.T) {
 	}
 }
 
-
 func TestMergeSets1(t *testing.T) {
-	sampleGrid := &sudoku.Grid{Ar:cells1}
+	sampleGrid := &sudoku.Grid{Ar: cells1}
 
 	relems := sudoku.FindElementsInRow(sampleGrid, 0)
 	celems := sudoku.FindElementsInCol(sampleGrid, 0)
@@ -170,12 +169,12 @@ func TestMergeSets1(t *testing.T) {
 	elems := sudoku.MergeSets1(relems, celems, aelems)
 
 	expelems := map[int]int{
-		0:1, 1:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1,
+		0: 1, 1: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1,
 	}
 
 	assert.Equal(t, elems, sudoku.Set(expelems))
 
-	expmiss := map[int]int{2:1}
+	expmiss := map[int]int{2: 1}
 	miss := sudoku.FindMissingInSet(elems)
 	assert.Equal(t, sudoku.Set(expmiss), miss)
 }
