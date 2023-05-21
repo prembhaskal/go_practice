@@ -22,28 +22,76 @@ type Cell struct {
 	Val     int
 }
 
+func (c Cell) String() string {
+	return fmt.Sprintf("cell at row: %d, col: %d, Val: %d, Valid: %v", c.Row, c.Col, c.Val, c.Valid)
+}
+
 type Set map[int]int
 
 var Debug = false
 
 func UpdateCellsWithMeta(grid *Grid) {
 	// invalid not used for now
-
 	initCellsInGrid(grid)
 	addEmptyCellInGrid(grid)
 	updateValidsInGrid(grid)
 }
 
 func updateValidsInGrid(grid *Grid) {
-	// for every empty cell
+	// for every non empty cell
 	//   update valid cells in the partnum, row and col
 	for r := 0; r < 9; r++ {
 		for c := 0; c < 9; c++ {
 			cell := grid.Cells[r][c]
-			if cell.Val == 0 {
-				cell.Valid = GetAllElemsSet()
+			if cell.Val != 0 {
+				updateValidInRow(grid, r, cell.Val)
+				updateValidInCol(grid, c, cell.Val)
+				updateValidInPart(grid, FindGridPart(r, c), cell.Val)
 			}
 		}
+	}
+}
+
+func updateValidInRow(grid *Grid, row, remval int) {
+	for c := 0; c < 9; c++ {
+		cell := grid.Cells[row][c]
+		if cell.Val == 0 {
+			RemoveFromSet(cell.Valid, remval)
+		}
+	}
+}
+
+func updateValidInCol(grid *Grid, col, remval int) {
+	for r := 0; r < 9; r++ {
+		cell := grid.Cells[r][col]
+		if cell.Val == 0 {
+			RemoveFromSet(cell.Valid, remval)
+		}
+	}
+}
+
+func updateValidInPart(grid *Grid, part, remval int) {
+	f := func(row, col int) {
+		cell := grid.Cells[row][col]
+		if cell.Val == 0 {
+			RemoveFromSet(cell.Valid, remval)
+		}
+	}
+	ExecuteFuncForCellsInPart(grid, part, f)
+}
+
+func ExecuteFuncForCellsInPart(grid *Grid, partnum int, f func(int, int)) {
+	roff, coff := FindStartCell(partnum)
+	for r := 0; r < 3; r++ {
+		for c := 0; c < 3; c++ {
+			f(r+roff, c+coff)
+		}
+	}
+}
+
+func RemoveFromSet(set Set, vals ...int) {
+	for _, v := range vals {
+		delete(set, v)
 	}
 }
 
@@ -57,6 +105,10 @@ func addEmptyCellInGrid(grid *Grid) {
 				Row: r,
 				Col: c,
 				Val: grid.Ar[r][c],
+			}
+
+			if cell.Val == 0 {
+				cell.Valid = GetAllElemsSet()
 			}
 
 			grid.Cells[r][c] = cell

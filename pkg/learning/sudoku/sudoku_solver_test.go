@@ -184,3 +184,33 @@ func TestSolveSingleCell(t *testing.T) {
 	// sudoku.Debug = true
 	sudoku.SolveSingleCell(sampleGrid)
 }
+
+func TestRemoveFromSet(t *testing.T) {
+	allset := sudoku.GetAllElemsSet()
+	sudoku.RemoveFromSet(allset, 1, 5)
+	fmt.Printf("allset is %v\n", allset)
+}
+
+func TestUpdateCellsWithMeta(t *testing.T) {
+	sampleGrid := &sudoku.Grid{Ar: cells1}
+	sudoku.UpdateCellsWithMeta(sampleGrid)
+
+	printcell := func(row, col int) {
+		cell := sampleGrid.Cells[row][col]
+		if cell.Val != 0 {
+			return
+		}
+		fmt.Println(cell)
+	}
+
+	executeForEachCell(sampleGrid, printcell)
+
+}
+
+func executeForEachCell(grid *sudoku.Grid, f func(int, int)) {
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			f(r, c)
+		}
+	}
+}
