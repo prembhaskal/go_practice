@@ -23,6 +23,20 @@ var cells1 = [][]int{
 	{7, 0, 8, 4, 5, 0, 0, 0, 6},
 }
 
+var cells2 = [][]int{
+	{6, 1, 7, 2, 4, 5, 9, 3, 8},
+	{8, 4, 3, 6, 7, 9, 5, 2, 1},
+	{5, 2, 9, 3, 1, 8, 4, 6, 7},
+
+	{1, 8, 2, 5, 6, 4, 3, 7, 9},
+	{3, 6, 5, 9, 2, 7, 1, 8, 4},
+	{9, 7, 4, 1, 8, 3, 6, 5, 2},
+
+	{4, 5, 6, 7, 9, 2, 8, 1, 3},
+	{2, 9, 1, 8, 3, 6, 7, 4, 5},
+	{7, 3, 8, 4, 5, 1, 2, 9, 6},
+}
+
 func TestFindGridParts(t *testing.T) {
 	// TODO - check the panic part
 
@@ -204,7 +218,6 @@ func TestUpdateCellsWithMeta(t *testing.T) {
 	}
 
 	executeForEachCell(sampleGrid, printcell)
-
 }
 
 func executeForEachCell(grid *sudoku.Grid, f func(int, int)) {
@@ -226,5 +239,13 @@ func TestSolveShadowFromAdjacentParts(t *testing.T) {
 	sampleGrid := &sudoku.Grid{Ar: cells1}
 	// sudoku.Debug = true
 	sudoku.UpdateCellsWithMeta(sampleGrid)
+	sudoku.SolveShadowFromAdjacentParts(sampleGrid)
+}
+
+func TestSolveUsingCurrentTechs(t *testing.T) {
+	sampleGrid := &sudoku.Grid{Ar: cells2}
+	// sudoku.Debug = true
+	sudoku.UpdateCellsWithMeta(sampleGrid)
+	sudoku.SolveSingleCellUsingMeta(sampleGrid)
 	sudoku.SolveShadowFromAdjacentParts(sampleGrid)
 }

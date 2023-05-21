@@ -140,7 +140,8 @@ func SolveSingleCellUsingMeta(grid *Grid) {
 			if len(cell.Valid) == 1 {
 				missval := FindFirstKey(cell.Valid)
 				part := FindGridPart(r, c)
-				fmt.Printf("lone miss at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
+				// fmt.Printf("LONE at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
+				PrintMiss("LONE", part, r, c, missval)
 			}
 		}
 	}
@@ -168,10 +169,16 @@ func SolveShadowFromAdjacentParts(grid *Grid) {
 			}
 
 			if validcnt == 1 {
-				fmt.Printf("part: %d, num: %d valid only in cell: %s\n", part, num, lastValidCell)
+				// fmt.Printf("SHADOW part: %d, num: %d valid only in cell: %s\n", part, num, lastValidCell)
+				// fmt.Printf(" at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
+				PrintMiss("SHADOW", part, lastValidCell.Row, lastValidCell.Col, num)
 			}
 		}
 	}
+}
+
+func PrintMiss(misstype string, part, row, col, missval int) {
+	fmt.Printf("%s at part:%d row:%d, col:%d val: %d\n", misstype, part, row, col, missval)
 }
 
 func executeForEachCell(grid Grid, f func(int, int)) {
