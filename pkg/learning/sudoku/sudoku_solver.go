@@ -132,6 +132,56 @@ func GetAllElemsSet() Set {
 	return mp
 }
 
+func SolveSingleCellUsingMeta(grid *Grid) {
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			cell := grid.Cells[r][c]
+			// check in each cell, if the map length is just 1
+			if len(cell.Valid) == 1 {
+				missval := FindFirstKey(cell.Valid)
+				part := FindGridPart(r, c)
+				fmt.Printf("lone miss at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
+			}
+		}
+	}
+}
+
+// assuming meta for grid is already updated.
+func SolveShadowFromAdjacentParts(grid *Grid) {
+	for part := 0; part < 9; part++ {
+		for num := 0; num < 9; num++ {
+
+			validcnt := 0
+			var lastValidCell *Cell
+			roff, coff := FindStartCell(part)
+
+			for r := 0; r < 3; r++ {
+				for c := 0; c < 3; c++ {
+					row := r + roff
+					col := c + coff
+					cell := grid.Cells[row][col]
+					if cell.Valid[num] > 0 {
+						validcnt++
+						lastValidCell = cell
+					}
+				}
+			}
+
+			if validcnt == 1 {
+				fmt.Printf("part: %d, num: %d valid only in cell: %s\n", part, num, lastValidCell)
+			}
+		}
+	}
+}
+
+func executeForEachCell(grid Grid, f func(int, int)) {
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			f(r, c)
+		}
+	}
+}
+
 func SolveSingleCell(grid *Grid) {
 	for r := 0; r < 9; r++ {
 		for c := 0; c < 9; c++ {

@@ -214,3 +214,17 @@ func executeForEachCell(grid *sudoku.Grid, f func(int, int)) {
 		}
 	}
 }
+
+func TestSolveSingleCellWithMeta(t *testing.T) {
+	sampleGrid := &sudoku.Grid{Ar: cells1}
+	// sudoku.Debug = true
+	sudoku.UpdateCellsWithMeta(sampleGrid)
+	sudoku.SolveSingleCellUsingMeta(sampleGrid)
+}
+
+func TestSolveShadowFromAdjacentParts(t *testing.T) {
+	sampleGrid := &sudoku.Grid{Ar: cells1}
+	// sudoku.Debug = true
+	sudoku.UpdateCellsWithMeta(sampleGrid)
+	sudoku.SolveShadowFromAdjacentParts(sampleGrid)
+}
