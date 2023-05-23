@@ -32,13 +32,13 @@ var cells2 = [][]int{
 	{5, 0, 0, 0, 0, 6, 0, 4, 3},
 	{0, 0, 2, 0, 0, 0, 7, 0, 0},
 	{9, 3, 0, 2, 0, 0, 0, 0, 6},
-	
+
 	{7, 0, 0, 0, 0, 0, 5, 0, 8},
 	{0, 2, 0, 5, 0, 0, 0, 0, 0},
 	{0, 0, 8, 7, 3, 0, 0, 0, 0},
 }
 
-var emptyGrid = [][]int {
+var emptyGrid = [][]int{
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -46,7 +46,7 @@ var emptyGrid = [][]int {
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
-	
+
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -254,7 +254,7 @@ func TestSolveShadowFromAdjacentParts(t *testing.T) {
 	sampleGrid := &sudoku.Grid{Ar: cells1}
 	// sudoku.Debug = true
 	sudoku.UpdateCellsWithMeta(sampleGrid)
-	sudoku.SolveShadowFromAdjacentParts(sampleGrid)
+	sudoku.SolveAloneInPart(sampleGrid)
 }
 
 func TestSolveUsingCurrentTechs(t *testing.T) {
@@ -262,7 +262,7 @@ func TestSolveUsingCurrentTechs(t *testing.T) {
 	// sudoku.Debug = true
 	sudoku.UpdateCellsWithMeta(sampleGrid)
 	sudoku.SolveSingleCellUsingMeta(sampleGrid)
-	sudoku.SolveShadowFromAdjacentParts(sampleGrid)
+	sudoku.SolveAloneInPart(sampleGrid)
 	fmt.Println(sampleGrid)
 }
 
@@ -274,13 +274,15 @@ func TestSolveWithUpdates(t *testing.T) {
 		i++
 		// sudoku.Debug = true
 		sudoku.UpdateCellsWithMeta(sampleGrid)
+		// sudoku.UpdateValidsInGrid(sampleGrid)
 		gridUpdate := sudoku.NewGridUpdate()
 
 		sudoku.SingleCellUpdates(sampleGrid, gridUpdate)
-		sudoku.ShadowFromAdjacentPartsUpdates(sampleGrid, gridUpdate)
+		sudoku.AloneInPartUpdates(sampleGrid, gridUpdate)
 
 		if len(gridUpdate) == 0 {
 			fmt.Printf("no more moves found, total iterations: %d\n", i)
+			sudoku.AlonePairInPartUpdatesCheck(sampleGrid)
 			break
 		}
 
@@ -288,7 +290,7 @@ func TestSolveWithUpdates(t *testing.T) {
 
 		fmt.Printf("current status: \n%s\n\n", sampleGrid)
 
-		fmt.Println("solving ...")
+		fmt.Printf("iteration: %d , solving ...\n", i)
 		time.Sleep(2 * time.Second)
 	}
 }

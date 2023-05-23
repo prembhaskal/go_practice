@@ -94,6 +94,10 @@ func UpdateCellsWithMeta(grid *Grid) {
 	updateValidsInGrid(grid)
 }
 
+// func UpdateValidsInGrid(grid *Grid) {
+// 	updateValidsInGrid(grid)
+// }
+
 func updateValidsInGrid(grid *Grid) {
 	// for every non empty cell
 	//   update valid cells in the partnum, row and col
@@ -211,13 +215,14 @@ func SingleCellUpdates(grid *Grid, gridUpdate GridUpdate) {
 }
 
 // assuming meta for grid is already updated.
-func SolveShadowFromAdjacentParts(grid *Grid) {
-	ShadowFromAdjacentPartsUpdates(grid, make(map[CellPos]int))
+func SolveAloneInPart(grid *Grid) {
+	AloneInPartUpdates(grid, make(map[CellPos]int))
 }
 
-func ShadowFromAdjacentPartsUpdates(grid *Grid, gridUpdate GridUpdate) {
+// check if a part, there exists a cell which has only one valid number.
+func AloneInPartUpdates(grid *Grid, gridUpdate GridUpdate) {
 	for part := 0; part < 9; part++ {
-		for num := 0; num < 9; num++ {
+		for num := 1; num <= 9; num++ {
 
 			validcnt := 0
 			var lastValidCell *Cell
@@ -240,6 +245,41 @@ func ShadowFromAdjacentPartsUpdates(grid *Grid, gridUpdate GridUpdate) {
 				// fmt.Printf(" at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
 				PrintMiss("SHADOW", part, lastValidCell.Row, lastValidCell.Col, num)
 				gridUpdate.AddEntry(lastValidCell.Row, lastValidCell.Col, num)
+			}
+		}
+	}
+}
+
+// checks if two cells in same row or same column, have same number in the valid,
+// and that number does not exist as part of valid in same cell.
+func AlonePairInPartUpdatesCheck(grid *Grid) {
+	for part := 0; part < 9; part++ {
+		for num := 1; num <= 9; num++ {
+			validcnt := 0
+			var validCells []*Cell
+			roff, coff := FindStartCell(part)
+
+			for r := 0; r < 3; r++ {
+				for c := 0; c < 3; c++ {
+					row := r + roff
+					col := c + coff
+					cell := grid.Cells[row][col]
+					if cell.Valid[num] > 0 {
+						validcnt++
+						validCells = append(validCells, cell)
+					}
+				}
+			}
+
+			if validcnt == 2 {
+				// fmt.Printf("SHADOW part: %d, num: %d valid only in cell: %s\n", part, num, lastValidCell)
+				// fmt.Printf(" at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
+				// PrintMiss("SHADOW", part, lastValidCell.Row, lastValidCell.Col, num)
+				// gridUpdate.AddEntry(lastValidCell.Row, lastValidCell.Col, num)
+				cell1 := validCells[0]
+				cell2 := validCells[1]
+				PrintMiss("ALONE PAIR PART 1", part, cell1.Row, cell1.Col, num)
+				PrintMiss("ALONE PAIR PART 2", part, cell2.Row, cell2.Col, num)
 			}
 		}
 	}
