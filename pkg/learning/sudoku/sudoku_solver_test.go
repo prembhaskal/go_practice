@@ -25,17 +25,31 @@ var cells1 = [][]int{
 }
 
 var cells2 = [][]int{
-	{6, 0, 0, 0, 4, 5, 9, 0, 8},
-	{0, 0, 0, 0, 7, 9, 0, 0, 0},
-	{5, 0, 0, 3, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 1, 7, 3, 0, 0},
+	{0, 0, 0, 0, 0, 8, 0, 2, 0},
+	{8, 0, 6, 0, 0, 0, 0, 0, 5},
 
-	{1, 8, 0, 0, 0, 0, 3, 0, 0},
-	{3, 6, 0, 0, 0, 0, 0, 8, 4},
-	{0, 0, 4, 0, 0, 0, 0, 5, 2},
+	{5, 0, 0, 0, 0, 6, 0, 4, 3},
+	{0, 0, 2, 0, 0, 0, 7, 0, 0},
+	{9, 3, 0, 2, 0, 0, 0, 0, 6},
+	
+	{7, 0, 0, 0, 0, 0, 5, 0, 8},
+	{0, 2, 0, 5, 0, 0, 0, 0, 0},
+	{0, 0, 8, 7, 3, 0, 0, 0, 0},
+}
 
-	{0, 0, 0, 0, 0, 2, 0, 0, 3},
-	{0, 0, 0, 8, 3, 0, 0, 0, 0},
-	{7, 0, 8, 4, 5, 0, 0, 0, 6},
+var emptyGrid = [][]int {
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0},
 }
 
 func TestFindGridParts(t *testing.T) {
@@ -255,7 +269,9 @@ func TestSolveUsingCurrentTechs(t *testing.T) {
 func TestSolveWithUpdates(t *testing.T) {
 	sampleGrid := &sudoku.Grid{Ar: cells2}
 
+	i := 0
 	for {
+		i++
 		// sudoku.Debug = true
 		sudoku.UpdateCellsWithMeta(sampleGrid)
 		gridUpdate := sudoku.NewGridUpdate()
@@ -264,7 +280,7 @@ func TestSolveWithUpdates(t *testing.T) {
 		sudoku.ShadowFromAdjacentPartsUpdates(sampleGrid, gridUpdate)
 
 		if len(gridUpdate) == 0 {
-			fmt.Println("no more moves found.")
+			fmt.Printf("no more moves found, total iterations: %d\n", i)
 			break
 		}
 
