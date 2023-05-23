@@ -3,6 +3,8 @@ package sudoku
 import (
 	"fmt"
 	"log"
+	"strconv"
+	"strings"
 )
 
 // grid is divided into 9 parts, each part of 9 cells each
@@ -29,6 +31,61 @@ func (c Cell) String() string {
 type Set map[int]int
 
 var Debug = false
+
+type CellPos struct {
+	Row int
+	Col int
+}
+
+type GridUpdate map[CellPos]int
+
+func NewGridUpdate() GridUpdate {
+	return make(map[CellPos]int)
+}
+
+func (g GridUpdate) AddEntry(row, col, val int) {
+	cellPos := CellPos{row, col}
+	g[cellPos] = val
+}
+
+func (g *Grid) String() string {
+	var sb strings.Builder
+	sb.WriteString(g.Printline())
+	for r := 0; r < 9; r++ {
+		if r == 3 || r == 6 {
+			sb.WriteString(g.Printline())
+		}
+		sb.WriteString("| ")
+		for c := 0; c < 9; c++ {
+			if c == 3 || c == 6 {
+				sb.WriteString("| ")
+			}
+			sb.WriteString(strconv.Itoa(g.Ar[r][c]))
+			sb.WriteString(" |")
+		}
+		sb.WriteString("\n")
+	}
+	sb.WriteString(g.Printline())
+	return sb.String()
+}
+
+func (g *Grid) Printline() string {
+	var sb strings.Builder
+	sb.WriteString(" ")
+	for i := 0; i < 18; i++ {
+		sb.WriteString(" _")
+	}
+	sb.WriteString("\n")
+	return sb.String()
+}
+
+func (g *Grid) UpdateGrid(gridUpdate GridUpdate) {
+	for k, v := range gridUpdate {
+		row := k.Row
+		col := k.Col
+		g.Ar[row][col] = v
+	}
+}
 
 func UpdateCellsWithMeta(grid *Grid) {
 	// invalid not used for now
@@ -133,6 +190,11 @@ func GetAllElemsSet() Set {
 }
 
 func SolveSingleCellUsingMeta(grid *Grid) {
+	gridUpdate := make(map[CellPos]int)
+	SingleCellUpdates(grid, gridUpdate)
+}
+
+func SingleCellUpdates(grid *Grid, gridUpdate GridUpdate) {
 	for r := 0; r < 9; r++ {
 		for c := 0; c < 9; c++ {
 			cell := grid.Cells[r][c]
@@ -142,6 +204,7 @@ func SolveSingleCellUsingMeta(grid *Grid) {
 				part := FindGridPart(r, c)
 				// fmt.Printf("LONE at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
 				PrintMiss("LONE", part, r, c, missval)
+				gridUpdate.AddEntry(r, c, missval)
 			}
 		}
 	}
@@ -149,6 +212,10 @@ func SolveSingleCellUsingMeta(grid *Grid) {
 
 // assuming meta for grid is already updated.
 func SolveShadowFromAdjacentParts(grid *Grid) {
+	ShadowFromAdjacentPartsUpdates(grid, make(map[CellPos]int))
+}
+
+func ShadowFromAdjacentPartsUpdates(grid *Grid, gridUpdate GridUpdate) {
 	for part := 0; part < 9; part++ {
 		for num := 0; num < 9; num++ {
 
@@ -172,6 +239,7 @@ func SolveShadowFromAdjacentParts(grid *Grid) {
 				// fmt.Printf("SHADOW part: %d, num: %d valid only in cell: %s\n", part, num, lastValidCell)
 				// fmt.Printf(" at part:%d row:%d, col:%d val: %d\n", part, r, c, missval)
 				PrintMiss("SHADOW", part, lastValidCell.Row, lastValidCell.Col, num)
+				gridUpdate.AddEntry(lastValidCell.Row, lastValidCell.Col, num)
 			}
 		}
 	}
