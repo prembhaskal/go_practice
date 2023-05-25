@@ -1,6 +1,6 @@
 module github.com/prembhaskal/go_practice
 
-go 1.17
+go 1.20
 
 require (
 	github.com/jeremywohl/flatten v1.0.1
