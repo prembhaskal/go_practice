@@ -3,6 +3,7 @@ package generics_test
 import (
 	"fmt"
 	"testing"
+
 	generics "github.com/prembhaskal/go_practice/pkg/learning/go/generics"
 )
 

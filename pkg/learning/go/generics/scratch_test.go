@@ -1,8 +1,8 @@
 package generics
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestScratch(t *testing.T) {
