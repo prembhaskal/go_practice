@@ -11,7 +11,7 @@ func NewStack[T any]() *Stack[T] {
 }
 
 func (s *Stack[T]) push(item T) {
-	s.ar = append(s.ar, item)
+	s.ar =   append(s.ar, item)
 }
 
 func (s *Stack[T]) pop() T {
@@ -25,5 +25,4 @@ func (s *Stack[T]) pop() T {
 }
 
 func (s *Stack[T]) isempty() bool {
-	return len(s.ar) == 0
-}
+	return len(s.ar) == 0}
