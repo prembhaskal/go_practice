@@ -17,7 +17,7 @@ PACKAGES = $(shell go list ./... | grep -v /vendor/)
 lint:
 	env GO111MODULE=off go fmt ./...
 	env GO111MODULE=on go vet -mod=vendor ./...
-	gofumports -w ./pkg/
+	gofmt -w ./pkg/
 
 install-build-deps:
 	go install -v $(LINTERS)
