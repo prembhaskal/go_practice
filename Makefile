@@ -52,3 +52,10 @@ build-atl-upload:
 docker-build:
 	docker build --rm -t go_sample_stuffs .
 
+modtidy:
+	go mod tidy
+
+modvendor:
+	go mod vendor
+
+modall: modtidy modvendor
