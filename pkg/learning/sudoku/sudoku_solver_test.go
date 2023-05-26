@@ -274,6 +274,7 @@ func TestSolveWithUpdates(t *testing.T) {
 		i++
 		// sudoku.Debug = true
 		sudoku.UpdateCellsWithMeta(sampleGrid)
+		// sudoku.AlonePairInPartUpdatesCheck(sampleGrid)
 		// sudoku.UpdateValidsInGrid(sampleGrid)
 		gridUpdate := sudoku.NewGridUpdate()
 
@@ -282,7 +283,7 @@ func TestSolveWithUpdates(t *testing.T) {
 
 		if len(gridUpdate) == 0 {
 			fmt.Printf("no more moves found, total iterations: %d\n", i)
-			sudoku.AlonePairInPartUpdatesCheck(sampleGrid)
+			// sudoku.AlonePairInPartUpdatesCheck(sampleGrid)
 			break
 		}
 
@@ -291,6 +292,6 @@ func TestSolveWithUpdates(t *testing.T) {
 		fmt.Printf("current status: \n%s\n\n", sampleGrid)
 
 		fmt.Printf("iteration: %d , solving ...\n", i)
-		time.Sleep(2 * time.Second)
+		time.Sleep(250 * time.Millisecond)
 	}
 }

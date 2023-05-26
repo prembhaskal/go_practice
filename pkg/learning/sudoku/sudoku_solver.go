@@ -30,6 +30,14 @@ func (c Cell) String() string {
 
 type Set map[int]int
 
+func NewSet(ar []int) Set {
+	set := make(map[int]int)
+	for _, v := range ar {
+		set[v] = 1
+	}
+	return set
+}
+
 var Debug = false
 
 type CellPos struct {
@@ -92,6 +100,7 @@ func UpdateCellsWithMeta(grid *Grid) {
 	initCellsInGrid(grid)
 	addEmptyCellInGrid(grid)
 	updateValidsInGrid(grid)
+	AlonePairInPartUpdatesCheck(grid)
 }
 
 // func UpdateValidsInGrid(grid *Grid) {
@@ -122,10 +131,28 @@ func updateValidInRow(grid *Grid, row, remval int) {
 	}
 }
 
+func updateValidInRowExcl(grid *Grid, row, remval int, excludeCols Set) {
+	for c := 0; c < 9; c++ {
+		cell := grid.Cells[row][c]
+		if cell.Val == 0 && excludeCols[c] == 0 {
+			RemoveFromSet(cell.Valid, remval)
+		}
+	}
+}
+
 func updateValidInCol(grid *Grid, col, remval int) {
 	for r := 0; r < 9; r++ {
 		cell := grid.Cells[r][col]
 		if cell.Val == 0 {
+			RemoveFromSet(cell.Valid, remval)
+		}
+	}
+}
+
+func updateValidInColExcl(grid *Grid, col, remval int, excludeRows Set) {
+	for r := 0; r < 9; r++ {
+		cell := grid.Cells[r][col]
+		if cell.Val == 0 && excludeRows[r] == 0 {
 			RemoveFromSet(cell.Valid, remval)
 		}
 	}
@@ -278,8 +305,19 @@ func AlonePairInPartUpdatesCheck(grid *Grid) {
 				// gridUpdate.AddEntry(lastValidCell.Row, lastValidCell.Col, num)
 				cell1 := validCells[0]
 				cell2 := validCells[1]
-				PrintMiss("ALONE PAIR PART 1", part, cell1.Row, cell1.Col, num)
-				PrintMiss("ALONE PAIR PART 2", part, cell2.Row, cell2.Col, num)
+				if cell1.Col == cell2.Col || cell1.Row == cell2.Row {
+					PrintMiss("ALONE PAIR PART 1", part, cell1.Row, cell1.Col, num)
+					PrintMiss("ALONE PAIR PART 2", part, cell2.Row, cell2.Col, num)
+					if cell1.Col == cell2.Col {
+						// remove num from other rows of this column
+						exclRow := NewSet([]int{cell1.Row, cell2.Row})
+						updateValidInColExcl(grid, cell1.Col, num, exclRow)
+					} else {
+						// remove num from other cols of this row
+						exclCol := NewSet([]int{cell1.Col, cell2.Col})
+						updateValidInRowExcl(grid, cell1.Row, num, exclCol)
+					}
+				}
 			}
 		}
 	}
