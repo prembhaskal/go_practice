@@ -47,3 +47,58 @@ func nextPermutation(nums []int) {
 		j--
 	}
 }
+
+// bit simpler code
+func nextPermutation1(nums []int) {
+	// 1, 3, 4, 2, 5, 7, 6
+	// 1, 3, 4, 2, 6, 5, 7
+
+	// 5, 2, 4, 3, 1
+	// search element from last to first, not in sorted order
+	// exchange with smallest element bigger than it from right side
+	// sort the right side.
+	// 5, 3, 1, 2, 4
+
+	// 4, 3, 2, 1
+	// skip exchange part, just sort the right side
+	// 1, 2, 3, 4
+
+	// find element
+	n := len(nums)
+	exch_idx := -1
+	for i := n - 2; i >= 0; i-- {
+		curr := nums[i]
+		prev := nums[i+1]
+		if curr < prev {
+			exch_idx = i
+			break
+		}
+	}
+
+	// fmt.Printf("Exch idx is %d\n", exch_idx)
+	if exch_idx != -1 {
+		// find element to swap and swap, this search could be made binary search too, since in sorted form.
+		for i := n - 1; i > exch_idx; i-- {
+			if nums[i] > nums[exch_idx] {
+				// swap
+				nums[i], nums[exch_idx] = nums[exch_idx], nums[i]
+				break
+			}
+		}
+	}
+
+	// tosort := nums[exch_idx+1:]
+	// sort.Ints(tosort)
+
+	// already reverse sorted.
+	rev(nums, exch_idx+1, n-1)
+}
+
+func rev(a []int, s, e int) {
+	for s < e {
+		a[s], a[e] = a[e], a[s]
+		s++
+		e--
+	}
+
+}
