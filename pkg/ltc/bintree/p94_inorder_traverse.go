@@ -19,9 +19,9 @@ func inorderTraversalRec(root *TreeNode) []int {
 		return nil
 	}
 
-	arr := inorderTraversal(root.Left)
+	arr := inorderTraversalRec(root.Left)
 	arr = append(arr, root.Val)
-	arr1 := inorderTraversal(root.Right)
+	arr1 := inorderTraversalRec(root.Right)
 	arr = append(arr, arr1...)
 	return arr
 }
