@@ -11,6 +11,11 @@ func lengthOfLIS(nums []int) int {
 	// DP[i] = {max{DP[j]]} where j = i-1 to 0 and A[j] < A[i]}
 	// we use tail table to search in the smallest element larger than current element.
 
+	// tail table intuition
+	// tt[i] = x, it means 'x' is the smallest element using which we can have LIS of length 'i'
+	// whenever new number 'y' comes in, we check smallest number bigger than or equal to 'x', aka search for lower_bound
+
+
 	// initial condition
 	tt[1] = nums[0]
 
