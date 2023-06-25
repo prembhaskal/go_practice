@@ -16,7 +16,7 @@ func minCostConnectPoints(points [][]int) int {
 		}
 	}
 
-	// prims algo
+	// prim's algorithm
 	visited := make(map[int]bool)
 	// choose a vertex, add all its edges to min-heap
 	heap := newminheap1584()
@@ -135,7 +135,7 @@ func minCostConnectPoints1(points [][]int) int {
 		}
 	}
 
-	// run kruskal's algo
+	// run kruskal's algorithm
 
 	// sort edges
 	sort.Slice(edges, func(i, j int) bool {
