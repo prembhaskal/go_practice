@@ -23,7 +23,7 @@ func lcsusingbotupspacelessCond(s1, s2 string) int {
 		}
 		// trying to make the thing run faster by not creating new array.
 		prev, curr = curr, prev
-		for x, _ := range prev { // use range loop gives bit faster than loop
+		for x := range prev { // use range loop gives bit faster than loop
 			curr[x] = 0
 		}
 	}
