@@ -1,5 +1,8 @@
 package dp
 
+// summary
+// only consider 2 characters at a time, assign +1 and -1 to them
+// run kadane's algo to find maxsum, with 1 condition that at least one -1 present in it.
 func largestVariance(s string) int {
 	freqmap := make(map[rune]int)
 	for _, ch := range s {
@@ -23,8 +26,8 @@ func largestVariance(s string) int {
 				continue
 			}
 
-			rem_a := freqmap[ch1]
-			rem_b := freqmap[ch2]
+			rem_a := freqmap[ch1] // NOT needed
+			rem_b := freqmap[ch2] // NOT needed
 
 			has_a := false
 			has_b := false
@@ -47,8 +50,8 @@ func largestVariance(s string) int {
 				if has_a && has_b && currsum > mxsum {
 					mxsum = currsum
 				}
-				if currsum < 0 && rem_a > 0 && rem_b > 0 {
-					has_b = false // for case "abbba"
+				if currsum < 0 && rem_a > 0 && rem_b > 0 { // reset only when other a is available.
+					has_b = false // for case "abbba" and 'abbbb'
 					currsum = 0
 				}
 			}
