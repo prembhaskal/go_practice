@@ -63,7 +63,7 @@ func deleteAndEarnRec2(nums []int) int {
 	}
 
 	mem := make([]int, len(nums))
-	for i, _ := range mem {
+	for i := range mem {
 		mem[i] = -1
 	}
 
@@ -141,7 +141,7 @@ func deleteAndEarnRec(nums []int) int {
 		freqmap[v]++
 	}
 	mem := make(map[int]int)
-	for k, _ := range freqmap {
+	for k := range freqmap {
 		mem[k] = -1
 	}
 	return delEarnRec(newar, freqmap, 0, mem)

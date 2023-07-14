@@ -23,7 +23,7 @@ func minstaircost2(cost []int) int {
 	// f(i)  = min(i + f(i-1), i + f(i-2))
 	cost = append(cost, 0)
 	mem := make([]int, len(cost))
-	for k, _ := range mem {
+	for k := range mem {
 		mem[k] = -1
 	}
 	return minstaircostrec(len(cost)-1, cost, mem)

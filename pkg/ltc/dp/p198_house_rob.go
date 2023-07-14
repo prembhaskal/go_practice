@@ -10,7 +10,7 @@ func robdpnoarray(nums []int) int {
 	if n == 1 {
 		return doubprev
 	}
-	prev := max(nums[0], nums[1])
+	prev := max1218(nums[0], nums[1])
 	if n == 2 {
 		return prev
 	}
@@ -18,7 +18,7 @@ func robdpnoarray(nums []int) int {
 	// curr = max (nums[i] + doubprev, prev)
 	var curr int
 	for i := 2; i < n; i++ {
-		curr = max(nums[i]+doubprev, prev)
+		curr = max1218(nums[i]+doubprev, prev)
 		doubprev = prev
 		prev = curr
 	}
@@ -40,13 +40,13 @@ func robdp(nums []int) int {
 	if n == 1 {
 		return dp[0]
 	}
-	dp[1] = max(nums[0], nums[1])
+	dp[1] = max1218(nums[0], nums[1])
 	if n == 2 {
 		return dp[1]
 	}
 
 	for i := 2; i < n; i++ {
-		dp[i] = max(nums[i]+dp[i-2], dp[i-1])
+		dp[i] = max1218(nums[i]+dp[i-2], dp[i-1])
 	}
 	return dp[n-1]
 }
