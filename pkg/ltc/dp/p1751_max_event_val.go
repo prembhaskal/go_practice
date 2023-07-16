@@ -58,18 +58,18 @@ func maxValueDPSolve(events [][]int, k int) int {
 		return events[i][1] < events[j][1]
 	})
 
-	memo = make(map[pair]int)
+	memo = make(map[pair1125]int)
 	return maxValDP(events, 0, k)
 }
 
-var memo map[pair]int
+var memo map[pair1125]int
 
 func maxValDP(events [][]int, curr, k int) int {
 	if k == 0 || curr >= len(events) { // end of the road
 		return 0
 	}
 
-	currpair := pair{curr, k}
+	currpair := pair1125{curr, k}
 	if val, ok := memo[currpair]; ok {
 		return val
 	}
