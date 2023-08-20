@@ -1,5 +1,6 @@
 package graph
 
+// Topological sort
 func findOrder(numCourses int, prerequisites [][]int) []int {
 	// return tsortKahnAlgo(numCourses, prerequisites)
 	return tsortDFS(numCourses, prerequisites)
