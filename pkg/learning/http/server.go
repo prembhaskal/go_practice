@@ -9,6 +9,8 @@ import (
 
 var port int
 
+// env GOOS=android GOARCH=arm64 go build -o /tmp/time_server.out server.go
+// curl http://192.168.1.9:8090/test
 func main() {
 	flag.IntVar(&port, "port", 8090, "port where server to start on")
 	flag.Parse()
