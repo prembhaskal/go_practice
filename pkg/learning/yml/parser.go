@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"gopkg.in/yaml.v2"
+	yamlv3 "gopkg.in/yaml.v3"
 )
 
 // TODO check yaml.v3 too and see how it is different.
@@ -62,5 +63,37 @@ b:
 
 	log.Printf("unmarshal unstructued: \n%+v", unst)
 
+	return nil
+}
+
+func ParseYamlWithDuplicateKeys() error {
+	yamldata := `
+key1: value1
+key2: value2
+key1: repeat-value1
+`
+	unst := make(map[interface{}]interface{})
+	err := yaml.Unmarshal([]byte(yamldata), unst)
+	if err != nil {
+		log.Printf("error in unmarshal: %v", err)
+		return err
+	}
+	log.Printf("unmarshalled data: %v", unst)
+	return nil
+}
+
+func ParseYamlWithDuplicateKeysWithV3() error {
+	yamldata := `
+key1: value1
+key2: value2
+key1: repeat-value1
+`
+	unst := make(map[interface{}]interface{})
+	err := yamlv3.Unmarshal([]byte(yamldata), unst)
+	if err != nil {
+		log.Printf("error in unmarshal: %v", err)
+		return err
+	}
+	log.Printf("unmarshalled data: %v", unst)
 	return nil
 }
