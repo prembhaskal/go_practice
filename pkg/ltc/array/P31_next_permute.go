@@ -1,5 +1,7 @@
 package array
 
+import "slices"
+
 func nextPermutation(nums []int) {
 	// a1, a2, a3, a4, ..., ai, aj, .... an
 	// search from last find (ai, aj) pair such that ai < aj
@@ -101,4 +103,30 @@ func rev(a []int, s, e int) {
 		e--
 	}
 
+}
+
+func nextPermutation2(nums []int) {
+	n := len(nums)
+	for i := n - 2; i >= 0; i-- {
+		// i i+1
+		if nums[i] < nums[i+1] {
+			// i is anomaly
+
+			// find element to swap from back (since already sorted)
+			m := -1
+			for j := len(nums) - 1; j >= i+1; j-- {
+				if nums[j] > nums[i] {
+					m = j
+					break
+				}
+			}
+
+			nums[i], nums[m] = nums[m], nums[i]
+			// reverse remaining ones (already in descending order)
+			slices.Reverse(nums[i+1:])
+			return
+		}
+	}
+
+	slices.Reverse(nums)
 }
