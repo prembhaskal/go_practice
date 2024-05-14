@@ -7,9 +7,12 @@ package linklist
  *     Next *ListNode
  * }
  */
+ // maintain two pointer, forward pointer (ahead n steps) and lagging pointer
+ // when forward pointer reaches end, lagging pointer is at right place
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	curr := head
 
+	// curr is the forward pointer
 	for n > 0 && curr != nil {
 		curr = curr.Next
 		n--
@@ -21,11 +24,12 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	// fmt.Printf("curr at : %d\n", curr.Val)
 
 	curr = curr.Next
-	prev := head
+	prev := head // prev is lagging pointer
 	for curr != nil {
 		curr = curr.Next
 		prev = prev.Next
 	}
+	// when forward pointer is at end, it means lagging pointer is at right place.
 
 	prev.Next = prev.Next.Next
 	return head

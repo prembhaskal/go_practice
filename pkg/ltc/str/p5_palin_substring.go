@@ -5,6 +5,11 @@ func longestPalindrome(s string) string {
 	return longestPalinIter(s)
 }
 
+
+// approach
+// DP[i][j] is true if s[i:j] is palindrome
+// find palindromes of size 1, 2, 3 and so on, 
+// making use of prev. size result to efficiently find next size results.
 func longestPalinIter(s string) string {
 
 	A := []rune(s)
@@ -37,6 +42,7 @@ func longestPalinIter(s string) string {
 	for sz := 1; sz <= n; sz++ {
 		for st := 0; st < n; st++ {
 			en := st + sz - 1
+			// check if str[st...en] is a palindrome
 			if st+1 < n && en < n && en > 1 && dp[st+1][en-1] && A[st] == A[en] {
 				dp[st][en] = true
 				if sz > mx {
