@@ -127,3 +127,53 @@ func searchRange1(nums []int, target int) []int {
 	}
 	return []int{leftidx, rightidx}
 }
+
+
+// slightly simpler to reason aproach
+// keep tracking of where we saw target in another variable 'bound
+func lowerBound1(A []int, key int) int {
+    low := 0
+    high := len(A) - 1
+    bound := -1
+    for low < high {
+        mid := low + (high - low) / 2
+        if key > A[mid] {
+            low = mid + 1
+        } else if key < A[mid] {
+            high = mid - 1
+        } else {
+            bound = mid
+            high = mid - 1
+        }
+    }
+    if low == high {
+        if key == A[low] {
+            bound = low
+        }
+    }
+    return bound
+}
+
+func upperBound1(A []int, key int) int {
+    low := 0
+    high := len(A) - 1
+    bound := -1
+    for low < high {
+        mid := low + (high - low) / 2
+        if key < A[mid] {
+            high = mid - 1
+        } else if key > A[mid] {
+            low = mid + 1
+        } else {
+            bound = mid
+            low = mid + 1
+        }
+    }
+    if low == high {
+        if key == A[low] {
+            bound = low
+        }
+    }
+
+    return bound
+}
