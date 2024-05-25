@@ -3,7 +3,6 @@ package slidewin
 import "fmt"
 
 // sliding window with matching using comparing unique counts (instead of map hence faster)
-// TODO make it readable
 func minWindow(s string, t string) string {
 	// make map of t
 	freq := make(map[byte]int)
@@ -22,15 +21,6 @@ func minWindow(s string, t string) string {
 	// init slide window
 	actual := 0
 	slide := make(map[byte]int)
-	for i := 0; i < len(t); i++ {
-		slide[s[i]]++
-	}
-
-	for k, v := range slide {
-		if freq[k] > 0 && v >= freq[k] {
-			actual++
-		}
-	}
 
 	minlen := 1000000
 
@@ -40,67 +30,38 @@ func minWindow(s string, t string) string {
 
 	// iterate and check
 	cs := 0
-	ce := len(t) - 1
-	// fmt.Println("exp map")
-	// printmap(freq)
-	for ce < len(s) {
-		// check current state and record if smallest
-		// fmt.Println("actual map")
-		// printmap(slide)
-		// if isWindowSubstring(freq, slide) {
-		// fmt.Printf("matching start cs: %d, ce: %d, unique: %d, actual: %d\n", cs, ce, unique, actual)
-		if unique == actual {
-			currlen := ce - cs + 1
-			// fmt.Printf("matched map, cs: %d, ce: %d, currlen: %d, minlen: %d \n", cs, ce, currlen, minlen)
-			if currlen < minlen {
-				minlen = currlen
-				ms = cs
-				me = ce
-			}
-		}
+	ce := 0
 
-		// inc end
-		ce++
-		if ce == len(s) {
-			break
-		}
+	for ce < len(s) {
 		slide[s[ce]]++
 		if freq[s[ce]] > 0 && slide[s[ce]] == freq[s[ce]] {
+			// update only for EXACTLY matching (we don't update for greater count)
 			actual++
 		}
-		// fmt.Printf("slide map ce: %d\n", ce)
-		// printmap(slide)
 
-		// remove from start if not matching or if already present
-		for cs < ce {
-			startch := s[cs]
-			if freq[startch] == 0 {
-				cs++
-				slide[startch]--
-			} else if slide[startch] > freq[startch] {
-				cs++
-				slide[startch]--
-			} else {
-				// fmt.Printf("breaking cs inc at cs: %d, s[cs]: %c, ce: %d, s[ce]: %c \n", cs, startch, ce, s[ce])
-				// update actual
-				break
-			}
-		}
-
-		// fmt.Printf("matching cs: %d, ce: %d, unique: %d, actual: %d\n", cs, ce, unique, actual)
-
-		if unique == actual {
+		// shrink
+		// remove from start until it does not match
+		for unique == actual {
+			// update min
 			currlen := ce - cs + 1
-			// fmt.Printf("matched map, cs: %d, ce: %d, currlen: %d, minlen: %d \n", cs, ce, currlen, minlen)
 			if currlen < minlen {
 				minlen = currlen
 				ms = cs
 				me = ce
 			}
-		}
-	}
 
-	// fmt.Printf("breaking at cs: %d, ce: %d\n", cs, ce)
+			startch := s[cs]
+			if freq[startch] > 0 && slide[startch] == freq[startch] {
+				// reduce actual only when we remove char which has freq matching EXACTLY with needed. 
+				actual--
+			}
+			slide[startch]--
+			cs++
+		}
+
+		ce++
+
+	}
 
 	return s[ms : me+1]
 }
