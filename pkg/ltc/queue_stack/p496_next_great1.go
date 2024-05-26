@@ -1,8 +1,42 @@
 package queue_stack
 
+import (
+	gstack "github.com/emirpasic/gods/stacks/arraystack"
+)
+
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+	// create monotonic stack for nums2
+	stk := gstack.New()
+	stk.Push(-1)
+
+	nextBig := make(map[int]int)
+
+	for i := len(nums2) - 1; i >= 0; i-- {
+		num := nums2[i]
+		// check top of stack, if it is bigger than current, then mark that as next big in map
+		for {
+			top, _ := stk.Peek()
+			topn := top.(int)
+			if top == -1 || topn > num {
+				stk.Push(num)
+				nextBig[num] = topn
+				break
+			} else {
+				// keep removing until we get a bigger number
+				stk.Pop()
+			}
+		}
+	}
+	ans := make([]int, len(nums1))
+	for i := 0; i < len(nums1); i++ {
+		ans[i] = nextBig[nums1[i]]
+	}
+	return ans
+}
+
 // Explanation - using Stack as Monotonic stack, we have the next greater number or -1
 // using map, since given that all nos. in array are unique.
-func nextGreaterElement(nums1 []int, nums2 []int) []int {
+func nextGreaterElement1(nums1 []int, nums2 []int) []int {
 	stk := newstack()
 	stk.push(-1)
 

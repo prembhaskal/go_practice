@@ -3,6 +3,7 @@ module github.com/prembhaskal/go_practice
 go 1.20
 
 require (
+	github.com/emirpasic/gods v1.18.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/jeremywohl/flatten v1.0.1
 	github.com/stretchr/testify v1.9.0
