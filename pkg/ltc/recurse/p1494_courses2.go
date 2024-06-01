@@ -52,6 +52,7 @@ var minCnt = 10000
 var nodemap map[int]*Node
 
 
+// since memoization, always build answer from base (bottom) to up, learned it hard way today.
 func fn2(graph *Graph, k, mask, remCourses int) int {
 	// fmt.Printf("fn1 call mask: %d\n", mask)
 	if dp1[mask] != -1 {
