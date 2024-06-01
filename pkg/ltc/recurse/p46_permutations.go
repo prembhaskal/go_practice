@@ -5,16 +5,16 @@ var ans [][]int
 func permute(nums []int) [][]int {
     // 1 2 3
     // 1 3 2
-    ans = make([][]int, 0)
+    ans_130 = make([][]int, 0)
     permuteR(nums, 0)
-    return ans
+    return ans_130
 }
 
 func permuteR(nums []int, idx int) {
     if idx == len(nums) {
         cp := make([]int, len(nums))
         copy(cp, nums)
-        ans = append(ans, cp)
+        ans_130 = append(ans_130, cp)
         return
     }
 
@@ -39,11 +39,11 @@ func swap(nums []int, a, b int) {
 
 // technique with pick/not pick tracked using a map.
 func permute1(nums []int) [][]int {
-    ans = make([][]int, 0)
+    ans_130 = make([][]int, 0)
     freq := make(map[int]int)
     curr := make([]int, 0)
     permuteR1(nums, curr, freq)
-    return ans
+    return ans_130
 }
 
 
@@ -52,7 +52,7 @@ func permuteR1(nums, curr []int, freq map[int]int) {
     if len(curr) == len(nums) {
         cp := make([]int, len(curr))
         copy(cp, curr)
-        ans = append(ans, cp)
+        ans_130 = append(ans_130, cp)
         return
     }
 
