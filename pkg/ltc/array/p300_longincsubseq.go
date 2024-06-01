@@ -6,7 +6,8 @@ package array
 // tail table intuition
 // tt[i] = x, it means 'x' is the smallest element using which we can have LIS of length 'i'
 // whenever new number 'y' comes in, we check smallest number bigger than or equal to 'x', aka search for lower_bound
-
+// tt is by definition sorted in increasing order (try on paper if you are not convinced)
+// longest increasing subsequence
 func lengthOfLIS(nums []int) int {
 	if len(nums) == 0 {
 		return 0
