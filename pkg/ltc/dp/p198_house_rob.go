@@ -57,3 +57,48 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+
+
+func recmemc(nums []int) int {
+    mem := make([]int, len(nums))
+    for i := 0; i < len(mem); i++ {
+        mem[i] = -1
+    }
+    return recmem(nums, 0, mem)
+}
+
+// Approach - at each idx, check max answer obtained by either chosing or not chosing
+// if we have already processed index at 'next' , return same answer as nothing else has changed.
+func recmem(nums []int, next int, mem []int) int {
+    if next >= len(nums) {
+        return 0
+    }
+    if mem[next] != -1 {
+        return mem[next]
+    }
+
+    // chose next, means next+1 cannot be chosen
+    chose := recmem(nums, next + 2, mem) + nums[next]
+
+    // not chose next, means next+1 can be chosen
+    notchose := recmem(nums, next + 1, mem)
+
+    mem[next] = max(chose, notchose)
+    return mem[next]
+}
+
+// Approach - at each idx, check max answer obtained by either chosing or not chosing
+func rec(nums []int, next int) int {
+    if next >= len(nums) {
+        return 0
+    }
+
+    // chose next, means next+1 cannot be chosen
+    chose := rec(nums, next + 2) + nums[next]
+
+    // not chose next, means next+1 can be chosen
+    notchose := rec(nums, next + 1)
+
+    return max(chose, notchose)
+}
