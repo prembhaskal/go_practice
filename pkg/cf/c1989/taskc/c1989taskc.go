@@ -15,7 +15,7 @@ func main() {
 
 	solve(in, writer)
 }
-
+// https://codeforces.com/contest/1989/problem/C
 func solve(in *inputreader, out io.Writer) {
 	tests := in.nextInt()
 	for i := 0; i < tests; i++ {
