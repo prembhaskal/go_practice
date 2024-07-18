@@ -9,26 +9,43 @@ import (
 )
 
 func main() {
-	in := newInputReader(os.Stdin)
+	in := newInputReader()
 	writer := bufio.NewWriter(os.Stdout)
 	defer writer.Flush()
 
 	solve(in, writer)
 }
 
+// https://codeforces.com/contest/580/problem/A
 func solve(in *inputreader, out io.Writer) {
-	tests := in.nextInt()
-	for i := 0; i < tests; i++ {
+	n := in.nextInt()
+	ar := make([]int, n)
+	for i := 0; i < n; i++ {
+		ar[i] = in.nextInt()
 	}
-	fmt.Fprintln(out, tests)
+
+	maxlen := 1
+	clen := 1
+	prev := ar[0]
+	for i := 1; i < n; i++ {
+		if ar[i] >= prev {
+			clen++
+			maxlen = max(maxlen, clen)
+		} else {
+			clen = 1
+		}
+		prev = ar[i]
+	}
+
+	fmt.Fprintln(out, maxlen)
 }
 
 type inputreader struct {
 	reader *bufio.Scanner
 }
 
-func newInputReader(r io.Reader) *inputreader {
-	scn := bufio.NewScanner(r)
+func newInputReader() *inputreader {
+	scn := bufio.NewScanner(os.Stdin)
 	scn.Split(bufio.ScanWords)
 	return &inputreader{
 		reader: scn,
@@ -41,6 +58,14 @@ func (i *inputreader) next() string {
 		panic("no data to read")
 	}
 	return i.reader.Text()
+}
+
+func (i *inputreader) nextraw() []byte {
+	ok := i.reader.Scan()
+	if !ok {
+		panic("no data to read")
+	}
+	return i.reader.Bytes()
 }
 
 func (i *inputreader) nextInt() int {
